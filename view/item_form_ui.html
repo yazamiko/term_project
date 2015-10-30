@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Item</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="../">Aptaris</a>
+	    </div>
+	  </div>
+	</nav>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+    					<h3 class="panel-title">Item Registration</h3>
+  					</div>
+		  			<div class="panel-body">
+		    			<form action="../controller/item_form_controller.php" method="post"
+						onsubmit="return validateForm()" class="form-horizontal">
+							<fieldset>
+								<div class="form-group">
+									<label class="col-lg-4 control-label">Item Number</label>
+									<div class="col-lg-6">
+										<input type="text" name="item_number" id="item_number" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-4 control-label">Item Description</label>
+									<div class="col-lg-6">
+										<input type="text" name="item_desc" id="item_desc" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-4 control-label">Category</label>
+									<div class="col-lg-6">
+										<input type="text" name="category" id="category" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-4 control-label">Department Name</label>
+									<div class="col-lg-6">
+										<input type="text" name="dept_name" id="dept_name" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-4 control-label">Purchase Cost</label>
+									<div class="col-lg-3">
+										<input type="text" name="purchase_cost" id="purchase_cost" size="3" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-4 control-label">Full Retail Price</label>
+									<div class="col-lg-3">
+										<input type="text" name="full_retail_price" id="full_retail_price" size="3" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-10 col-lg-offset-2">
+										<button type="submit" class="btn btn-primary">Submit</button>
+										<button type="reset" class="btn btn-default">Clear</button>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						<h4 id="headErrMsg"></h4>
+						<ul id="errMsg"></ul>
+					<!-- panel content end DIV -->
+		  			</div>
+		  			<!-- Panel head end DIV -->
+				</div>	
+			<!-- col-md-8 end div -->
+			</div>
+		<!-- Row end DIV -->	
+		</div>
+		<footer>
+			<img src="images/wi.png" alt="Web App Dev logo" height="45" width="45" align="right">
+		</footer>
+	<!-- Container end DIV -->		
+	</div>
+
+	<script type="text/javascript" src="./js/item_form_validate.js">
+	</script>
+	<script type="text/javascript" src="./js/bootstrap.js">
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<html>
+<head>
+	<title>Search Item</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="../">Aptaris</a>
+	    </div>
+	  </div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+    					<h3 class="panel-title">Search Item</h3>
+  					</div>
+					<div class="panel-body">
+						<form action="../controller/select_items_promotion_controller.php" method="post" class="form-horizontal">
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Input</label>
+								<div class="col-lg-6">
+									<input type="text" name="search" id="search" onkeyup="retrieveResult()" class="form-control"> 
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="property" class="col-lg-2 control-label">Select</label>
+								<div class="col-lg-6">
+									<select class="form-control" id="property" name="property">
+										<option value="Category">Category</option>
+										<option value="DepartmentName">Department</option>
+										<option value="ItemNumber">Item Number</option>
+										<option value="ItemDescription">Description</option>
+									</select>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary">Add to Promotion</button>
+							<h3>Result:</h3>
+							<div id="resultTable"></div>
+						</form>
+					<!-- panel body -->
+					</div>
+				<!-- panel default div -->
+				</div>
+			<!-- col div -->
+			</div>
+		<!-- row div -->
+		</div>
+		
+		<footer>
+			<img src="images/wi.png" alt="Web App Dev logo" height="45" width="45" align="right">
+		</footer>
+	<!-- container div -->
+	</div>
+
+	<script type="text/javascript" src="./js/search_item.js">
+	</script>
+</body>
+</html>
