@@ -28,16 +28,16 @@ function checkAmountOff(amountOff) {
 		return response;
 	}
 }
-function checkPromoType(promoType) {
-	var response = {validate: true, errMsg: ""};
+//function checkPromoType(promoType) {
+//	var response = {validate: true, errMsg: ""};
 //	if(/^\d+\.\d{2}$/.test(promo_type)) {
-		return response;
+//		return response;
 //	} else {
 //		response.validate = false;
 //		response.errMsg = "<li>Purchase cost must contain only numbers followed by period and 2 digits after the period</li>";
 //		return response;
 //	}
-}
+//}
 
 
 function validateForm() {
