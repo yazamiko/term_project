@@ -1,3 +1,42 @@
+function sendData() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/item_form_controller.php";
+    xmlhttp.open("POST", url, true);
+
+    var params = "item_number=" + document.getElementById("item_number").value +
+    		"&item_desc=" + document.getElementById("item_desc").value +
+    		"&category=" + document.getElementById("category").value +
+    		"&dept_name=" + document.getElementById("dept_name").value +
+    		"&purchase_cost=" + document.getElementById("purchase_cost").value +
+    		"&full_retail_price=" + document.getElementById("full_retail_price").value;
+
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        	//alert(xmlhttp.responseText)
+            getSubmitStatus(xmlhttp.responseText);
+        }
+    }
+
+    xmlhttp.send(params);
+}
+
+function getSubmitStatus(response) {
+    var arr = JSON.parse(response);
+    $('#msgModal').html(arr.msg);
+    $('#myModal').modal('show');
+
+   	if(arr.status) {
+   		$( "#modalButton" ).click(function() {
+  			location.reload();
+		});
+   	}
+}
+
+/*
+	VALIDATE FUNCTIONS
+*/
 function checkItemNumber(itemNumber) {
 	var response = {validate: true, errMsg: ""};
 	if(/^[1-9][0-9]{5,}$/.test(itemNumber)) {
@@ -116,7 +155,9 @@ function validateForm() {
 		document.getElementById("headErrMsg").innerHTML 
 			= "Correct the following errors:";
 		document.getElementById("errMsg").innerHTML = errMsg;
+	} else {
+		sendData();
 	}
 
-	return validate;
+	return false;
 }

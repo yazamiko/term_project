@@ -1,6 +1,7 @@
 <?php
-	//require('../model/item.php');
 	require('../dao/item_dao.php');
+	header("Access-Control-Allow-Origin: *");
+	header("Content-Type: application/json; charset=UTF-8");
 
 	$newItem = new Item();
 	$itemDAO = new ItemDAO();
@@ -12,7 +13,9 @@
 	$newItem->setPurchaseCost($_POST["purchase_cost"]);
 	$newItem->setFullRetailPrice($_POST["full_retail_price"]);
 
-	$itemDAO->create($newItem);
+	$result = json_encode($itemDAO->create($newItem));
 
-	header("Location:../");
+	echo $result;
+
+	//header("Location:../");
 ?>

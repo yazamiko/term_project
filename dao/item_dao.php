@@ -27,7 +27,15 @@
 			$stmt->bindParam(':purchase_cost', $item->getPurchaseCost());
 			$stmt->bindParam(':full_retail_price', $item->getFullRetailPrice());
 
-			$stmt->execute();
+			try {
+				$stmt->execute();
+				//prepare an array to json_encode
+				return array('status' => true, 'msg' => 'Item was successfully added!');
+			} catch (PDOException $e) {
+				//prepare an array to json_encode
+				return array('status' => false, 'msg' => $e->getMessage());
+			}
+			
 		}
 		//retrieve item from database using its id
 		public function read($id) {

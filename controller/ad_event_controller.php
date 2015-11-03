@@ -1,5 +1,4 @@
 <?php
-	require('../model/ad.php');
 	require('../dao/ad_event_dao.php');
 
 	$newAd = new adEvent();

@@ -1,5 +1,4 @@
 <?php
-	//require('../model/promo.php');
 	require('../dao/promo_dao.php');
 
 	$newPromo = new Promo();

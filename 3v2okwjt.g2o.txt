@@ -1,0 +1,52 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   controller/ad_event_controller.php
+#	new file:   controller/add_item_promotion_controller.php
+#	new file:   controller/add_multiple_items_promotion_controller.php
+#	new file:   controller/item_form_controller.php
+#	new file:   controller/promo_form_controller.php
+#	new file:   controller/search_item_controller.php
+#	new file:   controller/search_promotion_controller.php
+#	new file:   controller/select_items_promotion_controller.php
+#	new file:   dao/ad_event_dao.php
+#	new file:   dao/item_dao.php
+#	new file:   dao/promo_dao.php
+#	new file:   index.html
+#	new file:   interfaces/dao_interface.php
+#	new file:   model/ad.php
+#	new file:   model/ad_event.php
+#	new file:   model/item.php
+#	new file:   model/promo.php
+#	new file:   mysql_conn.php
+#	new file:   view/ad_event_form_ui.html
+#	new file:   view/css/adtype_form.css
+#	new file:   view/css/bootstrap.css
+#	new file:   view/css/item_form.css
+#	new file:   view/css/style.css
+#	new file:   view/fonts/glyphicons-halflings-regular.eot
+#	new file:   view/fonts/glyphicons-halflings-regular.svg
+#	new file:   view/fonts/glyphicons-halflings-regular.ttf
+#	new file:   view/fonts/glyphicons-halflings-regular.woff
+#	new file:   view/fonts/glyphicons-halflings-regular.woff2
+#	new file:   view/images/wi.png
+#	new file:   view/item_form_ui.html
+#	new file:   view/item_page.html
+#	new file:   view/js/ad_event_validate.js
+#	new file:   view/js/adevent_form_validate.js
+#	new file:   view/js/bootstrap.js
+#	new file:   view/js/item_form_validate.js
+#	new file:   view/js/item_page.js
+#	new file:   view/js/npm.js
+#	new file:   view/js/promo_form_validate.js
+#	new file:   view/js/search_item.js
+#	new file:   view/js/search_promotion.js
+#	new file:   view/promo_form_ui.html
+#	new file:   view/search_item.html
+#	new file:   view/search_promotion.html
+#
+

@@ -1,5 +1,6 @@
 <?php
 	require('../interfaces/dao_interface.php');
+	require('../model/ad.php');
 	require('../mysql_conn.php');
 
 	class AdDAO implements iDAO  {
