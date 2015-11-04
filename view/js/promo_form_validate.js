@@ -74,7 +74,7 @@ function checkPromoType(promoType) {
 //		response.errMsg = "<li>Purchase cost must contain only numbers followed by period and 2 digits after the period</li>";
 //		return response;
 //	}
-//}
+}
 
 
 function validateForm() {
