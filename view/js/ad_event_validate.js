@@ -1,16 +1,56 @@
+function sendData() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/ad_event_controller.php";
+    xmlhttp.open("POST", url, true);
+
+    var params = "event_code=" + document.getElementById("event_code").value +
+    		"&event_name=" + document.getElementById("event_name").value +
+    		"&start_date=" + document.getElementById("start_date").value +
+    		"&end_date=" + document.getElementById("end_date").value +
+    		"&ad_description=" + document.getElementById("ad_description").value +
+    		"&ad_type=" + document.getElementById("ad_type").value;
+
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        	//alert(xmlhttp.responseText)
+            getSubmitStatus(xmlhttp.responseText);
+        }
+    }
+
+    xmlhttp.send(params);
+}
+
+function getSubmitStatus(response) {
+    var arr = JSON.parse(response);
+    $('#msgModal').html(arr.msg);
+    $('#myModal').modal('show');
+
+   	if(arr.status) {
+   		$( "#modalButton" ).click(function() {
+  			location.reload();
+		});
+   	}
+}
+
+/*
+	VALIDATE FUNCTIONS
+*/
+
 function checkEventCode()
 {
 	var eCode = document.getElementById("event_code").value;
 	
 	var response = {validation: true, errMsg: ""};
-	if(/^[A-Z0-9]{12}$/.test(eCode))
+	if(/^[A-Z0-9]{3,25}$/.test(eCode))
 	{
 		return response;
 	}
 	else
 	{
 		response.validation = false;
-		response.errMsg = "<li>Ad event code must be 12 characters long.</li>";
+		response.errMsg = "<li>Ad event code must be more than 3 and less than 25 alpha-numeric characters.</li>";
 		return response;
 	}
 }
@@ -163,8 +203,11 @@ function validate()
 			= "Correct the following errors:";
 		document.getElementById("errMsg").innerHTML = errMsg;
 	}
+	else {
+		sendData();
+	}
 	
-	return test;
+	return false;
 }
 
 function clearAll()

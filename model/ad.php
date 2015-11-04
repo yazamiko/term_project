@@ -68,11 +68,11 @@
 		 /*--------------------
 			Full Retail Price
 		 ---------------------*/
-		 public function setType($type) {
+		 public function setAdType($type) {
 		 	$this->type = $type;
 		 }
 
-		 public function getType() {
+		 public function getAdType() {
 		 	return $this->type;
 		 }
 	}
