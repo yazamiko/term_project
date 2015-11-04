@@ -1,3 +1,40 @@
+function sendData() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/promo_controller.php";
+    xmlhttp.open("POST", url, true);
+
+    var params = "name=" + document.getElementById("name").value +
+    		"&description=" + document.getElementById("description").value +
+    		"&amount_off=" + document.getElementById("amount_off").value +
+    		"&promo_type=" + document.getElementById("promo_type").value +
+
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        	//alert(xmlhttp.responseText)
+            getSubmitStatus(xmlhttp.responseText);
+        }
+    }
+
+    xmlhttp.send(params);
+}
+
+function getSubmitStatus(response) {
+    var arr = JSON.parse(response);
+    $('#msgModal').html(arr.msg);
+    $('#myModal').modal('show');
+
+   	if(arr.status) {
+   		$( "#modalButton" ).click(function() {
+  			location.reload();
+		});
+   	}
+}
+
+/*
+	VALIDATE FUNCTIONS
+*/
 function checkName(name) {
 	var response = {validate: true, errMsg: ""};
 	if(/([A-Za-z]*(\s)?.{1,35})$|^((\$)(\s)?(\d(\.\d{2}))[A-Za-z]*)+$|^(\d{2}\%(\s)?[A-Za-z]*)+$/.test(name)) {
