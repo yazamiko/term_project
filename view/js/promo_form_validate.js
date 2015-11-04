@@ -78,7 +78,7 @@ function checkAmountOff(amountOff) {
 
 
 function validateForm() {
-//	var validate = true;
+	var validate = true;
 	var errMsg = "";
 
 	//get item description from form input
