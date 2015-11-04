@@ -24,8 +24,6 @@
 			$stmt->bindParam(':description', $promo->getDescription());
 			$stmt->bindParam(':amount_off', $promo->getAmountOff());
 			$stmt->bindParam(':promo_type', $promo->getPromoType());
-
-			$stmt->execute();
 			
 			try {
 				$stmt->execute();
