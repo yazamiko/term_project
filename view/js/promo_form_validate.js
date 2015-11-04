@@ -119,8 +119,11 @@ function validateForm() {
 			= "Please correct the following errors:";
 		document.getElementById("errMsg").innerHTML = errMsg;
 	}
+	else {
+		sendData();
+	}
 
-	return validate;
+	return false;
 }
 function clearAll()
 {
