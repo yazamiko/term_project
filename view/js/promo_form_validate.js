@@ -122,3 +122,8 @@ function validateForm() {
 
 	return validate;
 }
+function clearAll()
+{
+	document.getElementById("headErrMsg").innerHTML = "";
+		document.getElementById("errMsg").innerHTML = "";
+}
