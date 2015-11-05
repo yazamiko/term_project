@@ -6,7 +6,7 @@ function sendData() {
     var params = "name=" + document.getElementById("name").value +
     		"&description=" + document.getElementById("description").value +
     		"&amount_off=" + document.getElementById("amount_off").value +
-    		"&promo_type=" + document.getElementById("promo_type").value +
+    		"&promo_type=" + document.getElementById("promo_type").value
 
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
@@ -35,6 +35,7 @@ function getSubmitStatus(response) {
 /*
 	VALIDATE FUNCTIONS
 */
+
 function checkName(name) {
 	var response = {validate: true, errMsg: ""};
 	if(/([A-Za-z]*(\s)?.{1,35})$|^((\$)(\s)?(\d(\.\d{2}))[A-Za-z]*)+$|^(\d{2}\%(\s)?[A-Za-z]*)+$/.test(name)) {
@@ -45,6 +46,7 @@ function checkName(name) {
 		return response;
 	}
 }
+
 function checkDescription(description) {
 	var response = {validate: true, errMsg: ""};
 	if(/^([A-Za-z]*(\s)?.{1,35})$|^((\$)(\s)?(\d(\.\d{2}))[A-Za-z]*)+$|^(\d{2}\%(\s)?[A-Za-z]*)+$/.test(description)) {
@@ -55,6 +57,7 @@ function checkDescription(description) {
 		return response;
 	}
 }
+
 function checkAmountOff(amountOff) {
 	var response = {validate: true, errMsg: ""};
 	if(/^(\d{1}(\.\d{2})?)$|^(\.\d{2})$/.test(amountOff)) {
@@ -65,17 +68,12 @@ function checkAmountOff(amountOff) {
 		return response;
 	}
 }
+
 function checkPromoType(promoType) {
 	var response = {validate: true, errMsg: ""};
-//	if(/^\d+\.\d{2}$/.test(promo_type)) {
-		return response;
-//	} else {
-//		response.validate = false;
-//		response.errMsg = "<li>Purchase cost must contain only numbers followed by period and 2 digits after the period</li>";
-//		return response;
-//	}
+	response.validate = true;
+	return response;
 }
-
 
 function validateForm() {
 	var validate = true;
@@ -105,9 +103,10 @@ function validateForm() {
 		validate = false;
 		errMsg += amountOffResponse.errMsg;
 	}
-	//get full retail price from form input
+
+	//get purchase cost from form input
 	var promoType = document.getElementById("promo_type").value;
-	//check full retail price and get response
+	//check purchase cost and get response
 	promoTypeResponse = checkPromoType(promoType);
 	if (promoTypeResponse.validate == false) {
 		validate = false;
@@ -125,6 +124,7 @@ function validateForm() {
 
 	return false;
 }
+
 function clearAll()
 {
 	document.getElementById("headErrMsg").innerHTML = "";
