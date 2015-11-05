@@ -14,7 +14,7 @@ function sendData() {
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        	//alert(xmlhttp.responseText)
+        	alert(xmlhttp.responseText)
             getSubmitStatus(xmlhttp.responseText);
         }
     }
@@ -161,7 +161,7 @@ function validate()
 {
 	var test = true;
 	var errMsg = "";
-	
+
 	var codeResponse = checkEventCode();
 	if(codeResponse.validation == false)
 	{

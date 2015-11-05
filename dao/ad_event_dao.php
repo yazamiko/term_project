@@ -25,9 +25,7 @@
 			$stmt->bindParam(':ad_description', $ad->getAdDescription());
 			$stmt->bindParam(':start_date', $ad->getStartDate());
 			$stmt->bindParam(':end_date', $ad->getEndDate());
-			$stmt->bindParam(':ad_type', $ad->getType());
-
-			$stmt->execute();
+			$stmt->bindParam(':ad_type', $ad->getAdType());
 			
 			try {
 				$stmt->execute();
