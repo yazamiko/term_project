@@ -24,8 +24,15 @@
 			$stmt->bindParam(':description', $promo->getDescription());
 			$stmt->bindParam(':amount_off', $promo->getAmountOff());
 			$stmt->bindParam(':promo_type', $promo->getPromoType());
-
-			$stmt->execute();
+			
+			try {
+				$stmt->execute();
+				//prepare an array to json_encode
+				return array('status' => true, 'msg' => 'Promotion was successfully added!');
+			} catch (PDOException $e) {
+				//prepare an array to json_encode
+				return array('status' => false, 'msg' => $e->getMessage());
+			}
 		}
 		public function readByProperty($value, $property) {
 			$sql = "SELECT * FROM Promotion WHERE UPPER($property) LIKE :value";

@@ -28,6 +28,16 @@
 			$stmt->bindParam(':ad_type', $ad->getType());
 
 			$stmt->execute();
+			
+			try {
+				$stmt->execute();
+				//prepare an array to json_encode
+				return array('status' => true, 'msg' => 'Ad event was successfully added!');
+			} catch (PDOException $e) {
+				//prepare an array to json_encode
+				return array('status' => false, 'msg' => $e->getMessage());
+			}
+		
 		}
 		//retrieve item from database using its id
 		public function read($id) {
