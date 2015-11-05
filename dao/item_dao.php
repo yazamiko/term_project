@@ -67,6 +67,29 @@
 			}
 			return $array;
 		}
+
+		public function readByItemNumber($itemNumber) {
+			$stmt = $this->conn->prepare("SELECT * FROM Item WHERE ItemNumber = :value");
+
+			$stmt->bindParam(':value', $itemNumber);
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$item = new Item();
+				$item->setItemNumber($rs['ItemNumber']);
+				$item->setItemDescription($rs['ItemDescription']);
+				$item->setCategory($rs['Category']);
+				$item->setDepartmentName($rs['DepartmentName']);
+				$item->setPurchaseCost($rs['PurchaseCost']);
+				$item->setFullRetailPrice($rs['FullRetailPrice']);
+
+				array_push($array, $item);
+			}
+			return $array;
+		}
 		// add item to promotion using item number and promotion code
 		public function addItemToPromotion($itemNumber, $promoCode) {
 			/*
@@ -122,7 +145,7 @@
 				return array('status' => true, 'msg' => 'Item was successfully edited!');
 			} catch (PDOException $e) {
 				//prepare an array to json_encode
-				return array('status' => false, 'msg' => $e->getMessage());
+				return array('status' => false, 'msg' => $e->getMessage() + $itemNumberBefore);
 			}
 		}
 		//delete item from database using its id

@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 $itemDAO = new ItemDAO();
-$result = $itemDAO->readByProperty($_GET["search"], $_GET["property"]);
+$result = $itemDAO->readByItemNumber($_GET["search"]);
 
 session_start();
 
