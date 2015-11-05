@@ -1,6 +1,6 @@
 function sendData() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "../controller/item_form_controller.php";
+    var url = "../controller/edit_item_form_controller.php";
     xmlhttp.open("POST", url, true);
 
     var params = "item_number=" + document.getElementById("item_number").value +
@@ -28,7 +28,7 @@ function getSubmitStatus(response) {
 
    	if(arr.status) {
    		$( "#modalButton" ).click(function() {
-  			location.reload();
+  			location.href = "../";
 		});
    	}
 }

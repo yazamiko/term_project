@@ -101,7 +101,29 @@
 		}
 		//update item
 		public function update($item) {
+			session_start();
+			$itemNumberBefore = $_SESSION["edit_item"];
 
+			$stmt = $this->conn->prepare("UPDATE Item 
+				SET ItemNumber = :item_number, ItemDescription = :item_desc, Category = :category, 
+				DepartmentName = :dept_name, PurchaseCost = :purchase_cost, FullRetailPrice = :full_retail_price
+				WHERE ItemNumber = :item_number_before" );
+			$stmt->bindParam(':item_number', $item->getItemNumber());
+			$stmt->bindParam(':item_desc', $item->getItemDescription());
+			$stmt->bindParam(':category', $item->getCategory());
+			$stmt->bindParam(':dept_name', $item->getDepartmentName());
+			$stmt->bindParam(':purchase_cost', $item->getPurchaseCost());
+			$stmt->bindParam(':full_retail_price', $item->getFullRetailPrice());
+			$stmt->bindParam(':item_number_before', $itemNumberBefore);
+
+			try {
+				$stmt->execute();
+				//prepare an array to json_encode
+				return array('status' => true, 'msg' => 'Item was successfully edited!');
+			} catch (PDOException $e) {
+				//prepare an array to json_encode
+				return array('status' => false, 'msg' => $e->getMessage());
+			}
 		}
 		//delete item from database using its id
 		public function delete($id) {

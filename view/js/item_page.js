@@ -1,3 +1,4 @@
+
 function getQueryVariable(variable)
 {
        var query = window.location.search.substring(1);
@@ -8,6 +9,13 @@ function getQueryVariable(variable)
        }
        return(false);
 }
+
+function sendToEditPage() {
+    var itemNumber = getQueryVariable("item_number");
+    location.href = "edit_item_form_ui.html?item_number=" + itemNumber;
+
+}
+
 function retrieveResult() {
     var xmlhttp = new XMLHttpRequest();
     var url = "../controller/search_item_controller.php";
