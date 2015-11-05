@@ -16,5 +16,5 @@
 	
 	echo $result;
 
-	header("Location:../");
+	//header("Location:../");
 ?>
