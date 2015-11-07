@@ -160,3 +160,8 @@ function validateForm() {
 
 	return false;
 }
+function clearAll()
+{
+	document.getElementById("headErrMsg").innerHTML = "";
+		document.getElementById("errMsg").innerHTML = "";
+}
