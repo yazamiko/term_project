@@ -66,7 +66,55 @@
 		}
 		//update promo
 		public function update($promo) {
+			session_start();
+			$itemNumberBefore = $_SESSION["edit_promo"];
 
+			$stmt = $this->conn->prepare("UPDATE Promotion SET 
+				Name = :name, Description = :description, 
+				AmountOff = :amount_off, PromoType = :promo_type 
+				WHERE PromoCode = :item_number_before" ); 
+			$stmt->bindParam(':item_number_before', $itemNumberBefore);
+			$stmt->bindParam(':name', $promo->getName());
+			$stmt->bindParam(':description', $promo->getDescription());
+			$stmt->bindParam(':amount_off', $promo->getAmountOff());
+			$stmt->bindParam(':promo_type', $promo->getPromoType());
+			try {
+				$stmt->execute();
+				//prepare an array to json_encode
+				return array('status' => true, 'msg' => 'Promotion was successfully edited!');
+			} catch (PDOException $e) {
+				//prepare an array to json_encode
+				return array('status' => false, 'msg' => $e->getMessage());
+			}
+
+			/*
+				Get AmountOff and PromoType from Promotion (it's needed to calculate the new retail price)
+			*/
+			$stmt = $this->conn->prepare("SELECT AmountOff, PromoType
+				FROM Promotion WHERE PromoCode=$promoCode");
+			$stmt->execute();
+
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			$promoType = $row['PromoType'];
+			$amountOff = floatval($row['AmountOff']);
+			/*
+				Get PurchaseCost from Item (it's needed to calculate the new retail price)
+			*/
+			$stmt = $this->conn->prepare("SELECT PurchaseCost
+				FROM Item WHERE ItemNumber=$itemNumber");
+			$stmt->execute();
+
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			$purchaseCost = floatval($row['PurchaseCost']);
+			$purchaseCost;
+
+			//Update new sale price based on promotion type
+			if($promoType == 'Dollar') $purchaseCost -= $amountOff;
+			else $purchaseCost -= ($purchaseCost * $amountOff);
+
+			$stmt = $this->conn->prepare("Update PromotionItem SET SalePrice = $purchaseCost 
+				WHERE PromoCode = $promoCode and ItemNumber = $itemNumber");
+			$stmt->execute();
 		}
 		//delete promo from database using its id
 		public function delete($id) {
