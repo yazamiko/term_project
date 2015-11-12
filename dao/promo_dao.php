@@ -2,6 +2,7 @@
 	require('../interfaces/dao_interface.php');
 	require('../model/promo.php');
 	require('../mysql_conn.php');
+	include_once('../model/item.php');
 
 	class PromoDAO implements iDAO  {
 		//database connection
@@ -57,6 +58,31 @@
 				$promo->setPromoType($rs['PromoType']);
 
 				array_push($array, $promo);
+			}
+			return $array;
+		}
+
+		public function readItemFromPromotion($promoCode) {
+			$stmt = $this->conn->prepare("SELECT * FROM Item 
+				INNER JOIN PromotionItem USING(ItemNumber) 
+				WHERE PromoCode=:promo_code");
+
+			$stmt->bindParam(':promo_code', $promoCode);
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$item = new Item();
+				$item->setItemNumber($rs['ItemNumber']);
+				$item->setItemDescription($rs['ItemDescription']);
+				$item->setCategory($rs['Category']);
+				$item->setDepartmentName($rs['DepartmentName']);
+				$item->setPurchaseCost($rs['PurchaseCost']);
+				$item->setFullRetailPrice($rs['FullRetailPrice']);
+
+				array_push($array, $item);
 			}
 			return $array;
 		}
