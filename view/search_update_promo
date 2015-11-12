@@ -1,0 +1,62 @@
+<html>
+<head>
+	<title>Promotion Display</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="../">Aptaris</a>
+	    </div>
+	  </div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-md-offset-4">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Search Promotion</h3>
+					</div>
+					<div class="panel-body">
+						<form method="post" class="form-horizontal">
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Input</label>
+								<div class="col-lg-6">
+									<input type="text" name="search" id="search" onkeyup="retrievePromotion()" class="form-control"> 
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Select</label>
+								<div class="col-lg-6">
+									<select id="property" name="property" class="form-control" onchange="retrievePromotion()">
+										<option value="PromoCode">Promo Code</option>
+										<option value="Name">Name</option>
+										<option value="Description">Description</option>
+									</select>
+								</div>
+							</div>
+						</form>
+					</div>
+				<!--panel div-->
+				</div>
+			<!--col div -->
+			</div>
+		<!--row div-->
+		</div>
+		<h3>Result:</h3>
+		<div id="resultTable2"></div>
+	<!--container div-->	
+	</div>
+
+	<script type="text/javascript" src="./js/search_update_promo.js"></script>
+
+</body>
+</html>
