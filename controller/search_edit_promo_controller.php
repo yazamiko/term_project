@@ -8,18 +8,16 @@ $result = $promoDAO->readByProperty($_GET["search"], $_GET["property"]);
 
 session_start();
 
-$outp = "[";
+
+$list = array();
 foreach($result as $rs) {
 	$_SESSION["edit_promo"] = $rs->getPromoCode();
-    if ($outp != "[") {$outp .= ",";}
-    $outp .= '{"PromoCode":"'  . $rs->getPromoCode() . '",';
-    $outp .= '"Name":"'   . $rs->getName() . '",';
-    $outp .= '"Description":"'   . $rs->getDescription() . '",';
-    $outp .= '"AmountOff":"'   . $rs->getAmountOff() . '",';
-    $outp .= '"PromoType":"'   . $rs->getPromoType() . '",';
+   	$list[] = array('PromoCode' => $rs->getPromoCode(),
+   					'Name' => $rs->getName(),
+   					'Description' => $rs->getDescription(),
+   					'AmountOff' => $rs->getAmountOff(),
+   					'PromoType' => $rs->getPromoType());
 }
-$outp .="]";
 
-
-echo($outp);
+echo(json_encode($list));
 ?>

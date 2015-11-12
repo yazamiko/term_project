@@ -28,6 +28,12 @@ function retrievePromotion() {
     retrieveResult();
 }
 
+function sendToEditPage() {
+    var promoCode = getQueryVariable("promo_code");
+    location.href = "edit_promo_form_ui.html?promo_code=" + promoCode;
+
+}
+
 function preparePromotionResult(response) {
     var arr = JSON.parse(response);
     document.getElementById("promo_code").innerHTML = arr[0].PromoCode;

@@ -18,7 +18,7 @@ function retrieveResult() {
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            myFunction(xmlhttp.responseText);
+          myFunction(xmlhttp.responseText);
         }
     }
 
@@ -28,8 +28,8 @@ function retrieveResult() {
 
 function myFunction(response) {
     var arr = JSON.parse(response);
-		document.getElementById("name").value;
-    		document.getElementById("description").value;
-    		document.getElementById("amount_off").value;
-    		document.getElementById("promo_type").value;
+		document.getElementById("name").value = arr[0].Name;
+    		document.getElementById("description").value = arr[0].Description;
+    		document.getElementById("amount_off").value = arr[0].AmountOff;
+    		document.getElementById("promo_type").value = arr[0].PromoType;
 }
