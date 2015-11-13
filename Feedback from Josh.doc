@@ -3,19 +3,25 @@ Feedback from Industrial Partner:
 UI
 
 •	Your team’s UI was great.  I liked the dark theme as well as the CSS as a whole across the application
+
 •	Search results screens were also good. I could see all the needed information clearly 
-•	Home screen could be improved
-o	Rather than everything in one drop down button, maybe you should break it down by “Areas” like having an “Item”, “Ad Event”, “Promo”, etc button.  Each with options like Add, Remove, Modify.  Something along those line would help make the home screen more user friendly
-•	“Single Item Information Screen” (from clicking on an item number in the search results screen).  Really like this view.  The idea is great, and I hope you are planning on making one for a Promotion and an Ad Event.  (Promotion should include a list of all its Items, Ad Event should include a list of all its Promotions)
+
+•	Home screen could be improved  ----------IN PROCESS---------
+  o	Rather than everything in one drop down button, maybe you should break it down by “Areas” like having an “Item”, “Ad     Event”, “Promo”, etc button.  Each with options like Add, Remove, Modify.  Something along those line would help make     the home screen more user friendly  ----------IN PROCESS---------
+
+•	“Single Item Information Screen” (from clicking on an item number in the search results screen).  Really like this view  .  The idea is great, and I hope you are planning on making one for a Promotion and an Ad Event.  (Promotion should         include a list of all its Items, Ad Event should include a list of all its Promotions)  ----------IN PROCESS---------
 
 
 Functionality
 
 •	Creating an item was great, liked the information at the bottom to tell you what was wrong rather than an alert or a new screen.
-o	However if you could condense the screen some so a user does not have to scroll that would be ideal
-•	Adding a Promotion had an error
+  o	However if you could condense the screen some so a user does not have to scroll that would be ideal ------FIXED------
+
+•	Adding a Promotion had an error   ------FIXED---------
+
 •	Adding an Item to a Promotion worked from the Item View
-o	However adding multiple items did not work
+  o	However adding multiple items did not work    ----------FIXED-------
+
 •	Search ability was great; the “search-as-you-go” is a nice feature.  Some things to take into consideration
-o	No way to see all Items/Promotions/Event (Open Search)
-o	Only have the ability to search on one attribute at a time.  What if I wanted to see all my Bakery Category Items that have “Donut” in the description?
+  o	No way to see all Items/Promotions/Event (Open Search)
+  o	Only have the ability to search on one attribute at a time.  What if I wanted to see all my Bakery Category Items        that have “Donut” in the description?
