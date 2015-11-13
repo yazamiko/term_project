@@ -1,6 +1,6 @@
 function sendData() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "../controller/promo_form_controller.php";
+    var url = "../controller/edit_promo_form_controller.php";
     xmlhttp.open("POST", url, true);
 
     var params = "name=" + document.getElementById("name").value +
