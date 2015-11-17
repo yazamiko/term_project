@@ -28,7 +28,7 @@ function getSubmitStatus(response) {
 
    	if(arr.status) {
    		$( "#modalButton" ).click(function() {
-  			location.href = "../";
+  			location.href = "../view/promotion_page.html?promo_code=" + promoCode";
 		});
    	}
 }
