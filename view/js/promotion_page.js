@@ -76,7 +76,8 @@ function myFunction(response) {
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +
-        "<a href='item_page.html?item_number="+ arr[i].ItemNumber +"'>"+ arr[i].ItemNumber +"</a>" +
+        //"<a href='item_page.html?item_number="+ arr[i].ItemNumber +"'>"+ arr[i].ItemNumber +"</a>" +
+        arr[i].ItemNumber +
         "</td><td>" +
         arr[i].ItemDescription +
         "</td><td>" +
