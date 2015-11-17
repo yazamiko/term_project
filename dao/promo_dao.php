@@ -106,13 +106,27 @@
 			$stmt->bindParam(':promo_type', $promo->getPromoType());
 			try {
 				$stmt->execute();
+				$update_item = $this->updatePromotionItem($promoCode);
 				//prepare an array to json_encode
-				return array('status' => true, 'msg' => 'Promotion was successfully edited!');
+				//return array('status' => true, 'msg' => 'Promotion was successfully edited!');
 			} catch (PDOException $e) {
 				//prepare an array to json_encode
 				return array('status' => false, 'msg' => $e->getMessage());
 			}
+		}
 
+		public function updatePromotionItem($promoCode) {
+
+			$stmt = $this->conn->prepare("SELECT ItemNumber FROM Item 
+				INNER JOIN PromotionItem USING(ItemNumber) 
+				WHERE PromoCode=:promo_code");
+
+			$stmt->bindParam(':promo_code', $promoCode);
+			$stmt->execute();
+
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			$itemNumber = $row['ItemNumber'];
+			
 			/*
 				Get AmountOff and PromoType from Promotion (it's needed to calculate the new retail price)
 			*/
@@ -140,8 +154,17 @@
 
 			$stmt = $this->conn->prepare("Update PromotionItem SET SalePrice = $purchaseCost 
 				WHERE PromoCode = $promoCode and ItemNumber = $itemNumber");
-			$stmt->execute();
+			try {
+				$stmt->execute();
+				//prepare an array to json_encode
+				return array('status' => true, 'msg' => 'Promotion was successfully edited!');
+			} catch (PDOException $e) {
+				//prepare an array to json_encode
+				return array('status' => false, 'msg' => $e->getMessage());
+			}
+
 		}
+
 		//delete promo from database using its id
 		public function delete($id) {
 
