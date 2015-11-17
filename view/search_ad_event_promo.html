@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Promotion Display</title>
+	<title>Promotion Search</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
@@ -23,29 +23,32 @@
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title">Search Promotion</h3>
+						<h3 class="panel-title">Search Ad Event</h3>
 					</div>
 					<div class="panel-body">
-						<form action="../controller/select_promotion_ad_event_controller.php" method="post" class="form-horizontal">
+						<form action="../controller/promo_ad_event_notes_controller.php" method="post" class="form-horizontal">
 							<div class="form-group">
 								<label class="col-lg-2 control-label">Input</label>
 								<div class="col-lg-6">
-									<input type="text" name="search" id="search" onkeyup="retrievePromotion()" class="form-control"> 
+									<input type="text" name="search" id="search" onkeyup="retrieveAdEvent()" class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">Select</label>
 								<div class="col-lg-6">
-									<select id="property" name="property" class="form-control" onchange="retrievePromotion()">
-										<option value="PromoCode">Promo Code</option>
-										<option value="Name">Name</option>
-										<option value="Description">Description</option>
+									<select id="property" name="property" class="form-control" onchange="retrieveAdEvent()">
+										<option value="eventCode">Event Code</option>
+										<option value="name">Name</option>
+										<option value="dates">Start Date to End Date (ex: yyyy-mm-dd to yyyy-mm-dd)</option>
+										<option value="startDate">Start Date (yyyy-mm-dd)</option>
+										<option value="endDate">End Date (yyyy-mm-dd)</option>
+										<option value="description">Description</option>
 									</select>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-primary">Add to Ad Event</button>
+							<button type="submit" class="btn btn-primary">Add</button>
 							<h3>Result:</h3>
-							<div id="resultTable2"></div>
+							<div id="resultTable"></div>
 						</form>
 					</div>
 				<!--panel div-->
@@ -57,7 +60,7 @@
 	<!--container div-->	
 	</div>
 
-	<script type="text/javascript" src="./js/search_update_promo.js"></script>
+	<script type="text/javascript" src="./js/search_ad_event_promo.js"></script>
 
 </body>
 </html>

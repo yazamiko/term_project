@@ -1,6 +1,6 @@
 function retrievePromotion() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "../controller/search_update_promo_controller.php";
+    var url = "../controller/search_promotion_controller.php";
 
     var search = document.getElementById("search").value;
     var property = document.getElementById("property").value;
@@ -26,11 +26,11 @@ function preparePromotionResult(response) {
             "<th>Description</th>" +
             "<th>Amount Off</th>" +
             "<th>Promotion Type</th>" +
-			"<th>Add to this Promotion</th>" +
+            "<th>Add to this Promotion</th>" +
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +
-        "<a href='promo_page.html?promo_code="+ arr[i].PromoCode +"'>"+ arr[i].PromoCode +"</a>"+
+        arr[i].PromoCode +
         "</td><td>" +
         arr[i].Name +
         "</td><td>" +
@@ -39,10 +39,10 @@ function preparePromotionResult(response) {
         arr[i].AmountOff +
         "</td><td>" +
         arr[i].PromoType +
-		"</td><td>" +
-		"<center><input type='checkbox' id='promoCodes[]' name='promoCodes[]' value="+ arr[i].PromoCode +"></center>"+
+        "</td><td>" +
+        "<center><input type='checkbox' id='promoCodes[]' name='promoCodes[]' value="+ arr[i].PromoCode +"></center>"+
         "</td></tr>";
     }
     out += "</table>";
-    document.getElementById("resultTable2").innerHTML = out;
+    document.getElementById("resultTable").innerHTML = out;
 }

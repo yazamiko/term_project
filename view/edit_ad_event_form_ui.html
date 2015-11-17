@@ -45,46 +45,46 @@
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-    					<h3 class="panel-title">Edit Item</h3>
+    					<h3 class="panel-title">Edit Ad Event</h3>
   					</div>
 		  			<div class="panel-body">
 		    			<form method="post"
-						onsubmit="return validateForm()" class="form-horizontal">
+						onsubmit="return validate()" class="form-horizontal">
 							<fieldset>
 								<div class="form-group">
-									<label class="col-lg-4 control-label">Item Number</label>
+									<label class="col-lg-4 control-label">Event Code</label>
 									<div class="col-lg-6">
-										<input type="text" name="item_number" id="item_number" class="form-control">
+										<input type="text" name="eventCode" id="eventCode" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-4 control-label">Item Description</label>
+									<label class="col-lg-4 control-label">Event Name</label>
 									<div class="col-lg-6">
-										<input type="text" name="item_desc" id="item_desc" class="form-control">
+										<input type="text" name="adName" id="adName" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-4 control-label">Category</label>
+									<label class="col-lg-4 control-label">Start Date</label>
 									<div class="col-lg-6">
-										<input type="text" name="category" id="category" class="form-control">
+										<input type="text" name="startDate" id="startDate" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-4 control-label">Department Name</label>
+									<label class="col-lg-4 control-label">End Date</label>
 									<div class="col-lg-6">
-										<input type="text" name="dept_name" id="dept_name" class="form-control">
+										<input type="text" name="endDate" id="endDate" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-4 control-label">Purchase Cost</label>
+									<label class="col-lg-4 control-label">Description</label>
 									<div class="col-lg-3">
-										<input type="text" name="purchase_cost" id="purchase_cost" size="3" class="form-control">
+										<input type="text" name="adDescription" id="adDescription" size="3" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-4 control-label">Full Retail Price</label>
+									<label class="col-lg-4 control-label">Event Type</label>
 									<div class="col-lg-3">
-										<input type="text" name="full_retail_price" id="full_retail_price" size="3" class="form-control">
+										<input type="text" name="adType" id="adType" size="3" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
@@ -113,9 +113,9 @@
 	<!-- Container end DIV -->		
 	</div>
 
-	<script type="text/javascript" src="./js/ad_event_validate.js">
+	<script type="text/javascript" src="./js/edit_ad_event_validate.js">
 	</script>
-	<script type="text/javascript" src="./js/edit_item.js">
+	<script type="text/javascript" src="./js/edit_ad_event.js">
 	</script>
 	<script type="text/javascript" src="./js/bootstrap.js">
 	</script>
