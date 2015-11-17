@@ -113,6 +113,7 @@
 				//prepare an array to json_encode
 				return array('status' => false, 'msg' => $e->getMessage());
 			}
+			return array('status' => true, 'msg' => 'Promotion was successfully edited!');
 		}
 
 		public function updatePromotionItem($promoCode) {
@@ -124,9 +125,11 @@
 			$stmt->bindParam(':promo_code', $promoCode);
 			$stmt->execute();
 
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			$itemNumber = $row['ItemNumber'];
-			
+			//$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			//$itemNumber = $row['ItemNumber'];
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$itemNumber = $rs['ItemNumber'];
 			/*
 				Get AmountOff and PromoType from Promotion (it's needed to calculate the new retail price)
 			*/
@@ -157,12 +160,12 @@
 			try {
 				$stmt->execute();
 				//prepare an array to json_encode
-				return array('status' => true, 'msg' => 'Promotion was successfully edited!');
+				//return array('status' => true, 'msg' => 'Promotion was successfully edited!');
 			} catch (PDOException $e) {
 				//prepare an array to json_encode
 				return array('status' => false, 'msg' => $e->getMessage());
 			}
-
+			}
 		}
 
 		//delete promo from database using its id
