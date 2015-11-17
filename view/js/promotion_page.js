@@ -38,7 +38,7 @@ function preparePromotionResult(response) {
     var arr = JSON.parse(response);
     document.getElementById("promo_code").innerHTML = arr[0].PromoCode;
     document.getElementById("name").innerHTML = arr[0].Name;
-    document.getElementById("desc").innerHTML = arr[0].Description;
+    document.getElementById("description").innerHTML = arr[0].Description;
     document.getElementById("amount_off").innerHTML = arr[0].AmountOff;
     document.getElementById("promo_type").innerHTML = arr[0].PromoType;
 }
