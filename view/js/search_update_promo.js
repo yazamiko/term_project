@@ -62,7 +62,7 @@ function preparePromotionResult(response) {
             "<th>Description</th>" +
             "<th>Amount Off</th>" +
             "<th>Promotion Type</th>" +
-			"<th>Add to this Promotion</th>" +
+            "<th>Add to Ad Event</th>" +
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +
@@ -75,7 +75,7 @@ function preparePromotionResult(response) {
         arr[i].AmountOff +
         "</td><td>" +
         arr[i].PromoType +
-		"</td><td>" +
+        "</td><td>" +
 		"<center><input type='checkbox' id='promoCodes[]' name='promoCodes[]' value="+ arr[i].PromoCode +"></center>"+
         "</td></tr>";
     }
