@@ -122,6 +122,13 @@
 				VALUES ($promoCode, $itemNumber, $purchaseCost)");
 			$stmt->execute();
 		}
+		// Remove Item from Promotion using item number and promotion code
+		public function removeItemFromPromotion($itemNumber, $promoCode) {
+
+			$stmt = $this->conn->prepare("DELETE FROM PromotionItem WHERE PromoCode = $promoCode AND ItemNumber = $itemNumber");
+			$stmt->execute();
+		}
+
 		//update item
 		public function update($item) {
 			session_start();
