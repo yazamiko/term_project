@@ -1,10 +1,46 @@
+function checkBoxChecked()
+{
+	var checkedAtLeastOne = false;
+	$('input[type="checkbox"]').each(function() {
+		if ($(this).is(":checked")) {
+			checkedAtLeastOne = true;
+		}
+	});
+	return checkedAtLeastOne;
+}
+
+function validate()
+{
+	if(document.getElementById("resultTable2").innerHTML == "")
+	{
+		document.getElementById("headErrMsg").innerHTML 
+			= "Correct the following errors:";
+		document.getElementById("errMsg").innerHTML = "<li>Please search for something first.</li>";
+		return false;
+	}
+	
+	var box = checkBoxChecked();
+	if(box == false)
+	{
+		document.getElementById("headErrMsg").innerHTML 
+			= "Correct the following errors:";
+		document.getElementById("errMsg").innerHTML = "<li>Please select at least one promotion.</li>";
+	}
+	
+	return box;
+}
+
 function retrievePromotion() {
     var xmlhttp = new XMLHttpRequest();
     var url = "../controller/search_update_promo_controller.php";
 
     var search = document.getElementById("search").value;
     var property = document.getElementById("property").value;
-
+	
+	document.getElementById("headErrMsg").innerHTML 
+				= "";
+	document.getElementById("errMsg").innerHTML = "";
+	
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             preparePromotionResult(xmlhttp.responseText);
