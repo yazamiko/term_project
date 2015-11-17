@@ -27,7 +27,7 @@ function getSubmitStatus(response) {
 
    	if(arr.status) {
    		$( "#modalButton" ).click(function() {
-  			 location.href = "edit_promo_form_ui.html?promo_code=" + promoCode;
+  			 location.href = "../view/promotion_page.html?promo_code=" + promoCode;
 		});
    	}
 }
