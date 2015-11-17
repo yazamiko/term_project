@@ -39,6 +39,8 @@ function preparePromotionResult(response) {
         arr[i].AmountOff +
         "</td><td>" +
         arr[i].PromoType +
+        "</td><td>" +
+		"<center><input type='checkbox' id='promoCodes[]' name='promoCodes[]' value="+ arr[i].PromoCode +"></center>"+
         "</td></tr>";
     }
     out += "</table>";
