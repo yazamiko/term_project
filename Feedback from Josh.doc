@@ -9,7 +9,7 @@ UI
 •	Home screen could be improved  ----------IN PROCESS---------
   o	Rather than everything in one drop down button, maybe you should break it down by “Areas” like having an “Item”, “Ad     Event”, “Promo”, etc button.  Each with options like Add, Remove, Modify.  Something along those line would help make     the home screen more user friendly  ----------IN PROCESS---------
 
-•	“Single Item Information Screen” (from clicking on an item number in the search results screen).  Really like this view  .  The idea is great, and I hope you are planning on making one for a Promotion and an Ad Event.  (Promotion should         include a list of all its Items, Ad Event should include a list of all its Promotions)  ----------IN PROCESS---------
+•	“Single Item Information Screen” (from clicking on an item number in the search results screen).  Really like this view  .  The idea is great, and I hope you are planning on making one for a Promotion and an Ad Event.  (Promotion should         include a list of all its Items, Ad Event should include a list of all its Promotions)  ----------FIXED---------
 
 
 Functionality
@@ -24,4 +24,4 @@ Functionality
 
 •	Search ability was great; the “search-as-you-go” is a nice feature.  Some things to take into consideration
   o	No way to see all Items/Promotions/Event (Open Search)
-  o	Only have the ability to search on one attribute at a time.  What if I wanted to see all my Bakery Category Items        that have “Donut” in the description?
+  o	Only have the ability to search on one attribute at a time.  What if I wanted to see all my Bakery Category Items        that have “Donut” in the description?  ------PROMOTION AND AD EVENT FIXED--------
