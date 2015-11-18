@@ -14,7 +14,7 @@ function validate()
 	if(document.getElementById("resultTable").innerHTML == "")
 	{
 		document.getElementById("headErrMsg").innerHTML 
-			= "Correct the following errors:";
+			= "Correct the following error:";
 		document.getElementById("errMsg").innerHTML = "<li>Please search for something first.</li>";
 		return false;
 	}
@@ -23,7 +23,7 @@ function validate()
 	if(box == false)
 	{
 		document.getElementById("headErrMsg").innerHTML 
-			= "Correct the following errors:";
+			= "Correct the following error:";
 		document.getElementById("errMsg").innerHTML = "<li>Please select at least one ad event.</li>";
 	}
 	
@@ -32,45 +32,38 @@ function validate()
 
 function retrieveAdEvent() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "../controller/search_ad_event_controller.php";
-
-    var search = document.getElementById("search").value;
-    var property = document.getElementById("property").value;
+    var url = "../controller/search_ad_event_controller.php?";
 	
-	document.getElementById("headErrMsg").innerHTML 
-				= "";
+	var eventCode = document.getElementById("event_code").value;
+	var eventName = document.getElementById("event_name").value;
+	var startDate = document.getElementById("start_date").value;
+	var endDate = document.getElementById("end_date").value;
+	var desc = document.getElementById("ad_description").value;
+
+	if(eventCode != "")
+		url += "eventCode=" + eventCode + "&";
+	if(eventName != "")
+		url += "eventName=" + eventName + "&";
+	if(startDate != "")
+		url += "startDate=" + startDate + "&";
+	if(endDate != "")
+		url += "endDate=" + endDate + "&";
+	if(desc != "")
+		url += "desc=" + desc + "&";
+	
+	url = url.slice(0, -1);
+		
+	document.getElementById("headErrMsg").innerHTML = "";
 	document.getElementById("errMsg").innerHTML = "";
 	
-	if(property == "dates")
-	{
-		var temp = search.split(" to ");
-			
-		if(temp.length == 2 && temp[0].length == 10 && temp[1].length == 10)
-		{
-			var startDate = temp[0];
-			var endDate = temp[1];
-			
-			xmlhttp.onreadystatechange=function() {
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					adEventResult(xmlhttp.responseText);
-				}
-			}
-	
-			xmlhttp.open("GET", url + "?property=" + property + "&startDate=" + startDate + "&endDate=" + endDate, true);
-			xmlhttp.send();
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			adEventResult(xmlhttp.responseText);
 		}
 	}
-	else
-	{
-		xmlhttp.onreadystatechange=function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				adEventResult(xmlhttp.responseText);
-			}
-		}
-	
-		xmlhttp.open("GET", url +"?search=" + search + "&property=" + property, true);
-		xmlhttp.send();
-	}
+		
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
 	
     return false;
 }
@@ -86,7 +79,7 @@ function adEventResult(response) {
             "<th>End Date</th>" +
             "<th>Description</th>" +
             "<th>Type</th>" +
-            "<th>Add to this Ad Event</th>" +
+            "<th>Select Ad Event(s)</th>" +
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +

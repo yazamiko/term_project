@@ -14,7 +14,7 @@ function validate()
 	if(document.getElementById("resultTable2").innerHTML == "")
 	{
 		document.getElementById("headErrMsg").innerHTML 
-			= "Correct the following errors:";
+			= "Correct the following error:";
 		document.getElementById("errMsg").innerHTML = "<li>Please search for something first.</li>";
 		return false;
 	}
@@ -23,7 +23,7 @@ function validate()
 	if(box == false)
 	{
 		document.getElementById("headErrMsg").innerHTML 
-			= "Correct the following errors:";
+			= "Correct the following error:";
 		document.getElementById("errMsg").innerHTML = "<li>Please select at least one promotion.</li>";
 	}
 	
@@ -32,13 +32,22 @@ function validate()
 
 function retrievePromotion() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "../controller/search_update_promo_controller.php";
+    var url = "../controller/search_update_promo_controller.php?";
 
-    var search = document.getElementById("search").value;
-    var property = document.getElementById("property").value;
+	var promoCode = document.getElementById("promoCode").value;
+	var name = document.getElementById("name").value;
+	var description = document.getElementById("description").value;
+
+	if(promoCode != "")
+		url += "promoCode=" + promoCode + "&";
+	if(name != "")
+		url += "name=" + name + "&";
+	if(description != "")
+		url += "description=" + description + "&";
 	
-	document.getElementById("headErrMsg").innerHTML 
-				= "";
+	url = url.slice(0, -1);
+	
+	document.getElementById("headErrMsg").innerHTML = "";
 	document.getElementById("errMsg").innerHTML = "";
 	
     xmlhttp.onreadystatechange=function() {
@@ -47,7 +56,7 @@ function retrievePromotion() {
         }
     }
 
-    xmlhttp.open("GET", url +"?search=" + search + "&property=" + property, true);
+    xmlhttp.open("GET", url, true);
     xmlhttp.send();
 
     return false;
@@ -62,7 +71,7 @@ function preparePromotionResult(response) {
             "<th>Description</th>" +
             "<th>Amount Off</th>" +
             "<th>Promotion Type</th>" +
-            "<th>Add to Ad Event</th>" +
+            "<th>Select Promotion(s)</th>" +
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +

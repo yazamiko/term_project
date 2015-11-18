@@ -41,14 +41,31 @@
 		public function read($id) {
 
 		}
-		public function readByProperty($value, $property) {
-			$stmt = $this->conn->prepare("SELECT * FROM AdEvent WHERE $property LIKE :value");
-
-			strtoupper($value);
-			if($property == "EventCode") $value = "%".$value."%";
-			else $value = $value."%";
-
-			$stmt->bindParam(':value', $value);
+		public function readByProperty($eventCode, $eventName, $startDate, $endDate, $desc) {
+			$sqlStmt = "";
+			
+			if($eventCode != "")
+				$sqlStmt = $sqlStmt."(EventCode LIKE '%".$eventCode."%') AND ";
+			
+			if($eventName != "")
+				$sqlStmt = $sqlStmt."(Name LIKE '%".$eventName."%') AND ";
+			
+			if($startDate != "")
+				$sqlStmt = $sqlStmt."(StartDate LIKE '%".$startDate."%') AND ";
+			
+			if($endDate != "")
+				$sqlStmt = $sqlStmt."(EndDate LIKE '%".$endDate."%') AND ";
+			
+			if($desc != "")
+				$sqlStmt = $sqlStmt."(Description LIKE '%".$desc."%') AND ";
+			
+			if($sqlStmt != "")
+				$sqlStmt = substr($sqlStmt, 0, -5);
+			else
+				$sqlStmt = "1";
+			
+			$stmt = $this->conn->prepare("SELECT * FROM AdEvent WHERE ( ".$sqlStmt." )");
+			
 			$stmt->execute();
 			
 			$array = array();

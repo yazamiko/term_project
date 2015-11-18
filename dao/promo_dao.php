@@ -35,15 +35,29 @@
 				return array('status' => false, 'msg' => $e->getMessage());
 			}
 		}
-		public function readByProperty($value, $property) {
-			$sql = "SELECT * FROM Promotion WHERE UPPER($property) LIKE :value";
-			$stmt = $this->conn->prepare($sql);
+		public function readByProperty($promoCode, $name, $description) {
+			$sqlStmt = "";
 			
-			strtoupper($value);
-			if($property != "PromoCode") $value = "%".$value."%";
-			else $value = $value."%";
-
-			$stmt->bindParam(':value', $value);
+			if($promoCode != "")
+				$sqlStmt = $sqlStmt."(PromoCode LIKE '%".$promoCode."%') AND ";
+			
+			if($name != "")
+				$sqlStmt = $sqlStmt."(Name LIKE '%".$name."%') AND ";
+			
+			if($description != "")
+				$sqlStmt = $sqlStmt."(Description LIKE '%".$description."%') AND ";
+			
+			if($sqlStmt != "")
+				$sqlStmt = substr($sqlStmt, 0, -5);
+			else
+				$sqlStmt = "1";
+			
+			$stmt = $this->conn->prepare("SELECT * FROM Promotion WHERE ( ".$sqlStmt." )");
+			
+			
+			//$sql = "SELECT * FROM Promotion WHERE ( ".$sqlStmt." )");
+			//$stmt = $this->conn->prepare($sql);
+			
 			$stmt->execute();
 			
 			$array = array();

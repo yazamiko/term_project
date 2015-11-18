@@ -5,12 +5,25 @@
 	
 	$adDAO = new AdDAO();
 	$result = null;
-	$property = $_GET["property"];
+
+	$eventCode = "";
+	$eventName = "";
+	$startDate = "";
+	$endDate = "";
+	$desc = "";
 	
-	if($property == "dates")
-		$result = $adDAO->readByDates($_GET["startDate"], $_GET["endDate"]);
-	else
-		$result = $adDAO->readByProperty($_GET["search"], $property);
+	if(isset($_GET["eventCode"]))
+		$eventCode = $_GET["eventCode"];
+	if(isset($_GET["eventName"]))
+		$eventName = $_GET["eventName"];
+	if(isset($_GET["startDate"]))
+		$startDate = $_GET["startDate"];
+	if(isset($_GET["endDate"]))
+		$endDate = $_GET["endDate"];
+	if(isset($_GET["desc"]))
+		$desc = $_GET["desc"];
+	
+	$result = $adDAO->readByProperty($eventCode, $eventName, $startDate, $endDate, $desc);
 		
 	$outp = "[";
 	foreach($result as $rs) {
