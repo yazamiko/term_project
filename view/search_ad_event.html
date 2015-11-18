@@ -7,7 +7,7 @@
 	<script type="text/javascript" src="./js/jquery-2.1.4.js">
 	</script>
 </head>
-<body onload="retrieveAdEvent()">
+<body>
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -23,7 +23,7 @@
 	</nav>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">Search Ad Event</h3>
@@ -32,32 +32,32 @@
 						<form action="../controller/select_ad_event_promotion_controller.php" method="post" class="form-horizontal" 
 								onsubmit="return validate()">
 							<div class="form-group">
-									<label class="col-lg-4 control-label">Ad Event Number</label>
-									<div class="col-lg-6">
+									<label class="col-lg-3 control-label">Ad Event Number</label>
+									<div class="col-lg-7">
 										<input type="text" name="event_code" id="event_code" onkeyup="retrieveAdEvent()" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-4 control-label">Event Name</label>
-									<div class="col-lg-6">
+									<label class="col-lg-3 control-label">Event Name</label>
+									<div class="col-lg-7">
 										<input type="text" name="event_name" id="event_name" onkeyup="retrieveAdEvent()" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-4 control-label">Start Date</label>
-									<div class="col-lg-6">
+									<label class="col-lg-3 control-label">Start Date</label>
+									<div class="col-lg-7">
 										<input type="text" placeholder="YYYY-MM-DD" name="start_date" id="start_date" onkeyup="retrieveAdEvent()" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-4 control-label">End Date</label>
-									<div class="col-lg-6">
+									<label class="col-lg-3 control-label">End Date</label>
+									<div class="col-lg-7">
 										<input type="text" placeholder="YYYY-MM-DD" name="end_date" id="end_date" onkeyup="retrieveAdEvent()" class="form-control">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-4 control-label">Ad Description</label>
-									<div class="col-lg-6">
+									<label class="col-lg-3 control-label">Ad Description</label>
+									<div class="col-lg-7">
 										<input type="text_area" name="ad_description" id="ad_description" onkeyup="retrieveAdEvent()" class="form-control">
 									</div>
 								</div>
