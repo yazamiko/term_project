@@ -120,7 +120,7 @@
 			$stmt->bindParam(':promo_type', $promo->getPromoType());
 			try {
 				$stmt->execute();
-				$update_item = $this->updatePromotionItem($promoCode);
+				$update_item = $this->updatePromotionItem($itemNumberBefore);
 				//prepare an array to json_encode
 				//return array('status' => true, 'msg' => 'Promotion was successfully edited!');
 			} catch (PDOException $e) {

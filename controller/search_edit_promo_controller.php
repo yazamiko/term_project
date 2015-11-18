@@ -4,7 +4,15 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 $promoDAO = new PromoDAO();
-$result = $promoDAO->readByProperty($_GET["search"], $_GET["property"]);
+
+$promoCode = "";
+$name = "";
+$description = "";
+	
+if(isset($_GET["search"]))
+	$promoCode = $_GET["search"];
+
+$result = $promoDAO->readByProperty($promoCode, $name, $description);
 
 session_start();
 

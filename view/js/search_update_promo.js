@@ -75,7 +75,7 @@ function preparePromotionResult(response) {
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +
-        "<a href='promo_page.html?promo_code="+ arr[i].PromoCode +"'>"+ arr[i].PromoCode +"</a>"+
+        "<a href='promotion_page.html?promo_code="+ arr[i].PromoCode +"'>"+ arr[i].PromoCode +"</a>"+
         "</td><td>" +
         arr[i].Name +
         "</td><td>" +
