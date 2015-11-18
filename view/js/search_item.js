@@ -1,17 +1,54 @@
+function checkBoxChecked()
+{
+    var checkedAtLeastOne = false;
+    $('input[type="checkbox"]').each(function() {
+        if ($(this).is(":checked")) {
+            checkedAtLeastOne = true;
+        }
+    });
+    return checkedAtLeastOne;
+}
+
+function validate()
+{
+    var box = checkBoxChecked();
+    if(box == false)
+    {
+        document.getElementById("headErrMsg").innerHTML 
+            = "Correct the following error:";
+        document.getElementById("errMsg").innerHTML = "<li>Please select at least one item.</li>";
+    }
+    
+    return box;
+}
+
 function retrieveResult() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "../controller/search_item_controller.php";
+    var url = "../controller/search_item_controller.php?";
+	
+    var itemNum = document.getElementById("item_number").value;
+    var itemDesc = document.getElementById("item_desc").value;
+    var cat = document.getElementById("category").value;
+    var deptName = document.getElementById("dept_name").value;
 
-    var search = document.getElementById("search").value;
-    var property = document.getElementById("property").value;
-
+    if(itemNum != "")
+        url += "item_num=" + itemNum + "&";
+    if(itemDesc != "")
+        url += "item_desc=" + itemDesc + "&";
+    if(cat != "")
+        url += "category=" + cat + "&";
+    if(deptName != "")
+        url += "dept_name=" + deptName + "&";
+    
+    url = url.slice(0, -1);
+	
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             myFunction(xmlhttp.responseText);
         }
     }
 
-    xmlhttp.open("GET", url +"?search=" + search + "&property=" + property, true);
+    xmlhttp.open("GET", url, true);
     xmlhttp.send();
 
     return false;

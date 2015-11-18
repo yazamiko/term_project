@@ -42,10 +42,10 @@
 	
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+            <div class="col-md-6 col-md-offset-2">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title">Would you like to add notes to the ad event and promotion?</h3>
+                        <center><h3 class="panel-title">Would you like to add notes to the ad event and promotion?</h3></center>
 					</div>
 					<div class="panel-body">
 						<form method="post" class="form-horizontal" onsubmit="return validate()">
@@ -55,8 +55,8 @@
 									<textarea rows="3" name="notes" id="notes" class="form-control"></textarea>
 								</div>
 							</div>
-								<button type="submit" class="btn btn-primary">Yes! Add now!</button>
-								<button type="reset" class="btn btn-default" onclick="noNotes()">No thank you.</button>
+                                <button type="submit" class="btn btn-primary">Add notes and submit</button>
+                                <button type="reset" class="btn btn-default pull-right" onclick="noNotes()">Don't add notes and submit</button>
 						</form>
 					</div>	
 					<!--panel div-->

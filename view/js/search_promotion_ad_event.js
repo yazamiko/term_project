@@ -11,14 +11,6 @@ function checkBoxChecked()
 
 function validate()
 {
-	if(document.getElementById("resultTable").innerHTML == "")
-	{
-		document.getElementById("headErrMsg").innerHTML 
-			= "Correct the following error:";
-		document.getElementById("errMsg").innerHTML = "<li>Please search for something first.</li>";
-		return false;
-	}
-	
 	var box = checkBoxChecked();
 	if(box == false)
 	{

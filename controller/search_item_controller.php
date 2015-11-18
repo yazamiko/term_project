@@ -4,7 +4,22 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 $itemDAO = new ItemDAO();
-$result = $itemDAO->readByProperty($_GET["search"], $_GET["property"]);
+
+$itemNum = "";
+$itemDesc = "";
+$cat = "";
+$deptName = "";
+
+if(isset($_GET["item_num"]))
+    $itemNum = $_GET["item_num"];
+if(isset($_GET["item_desc"]))
+    $itemDesc = $_GET["item_desc"];
+if(isset($_GET["category"]))
+    $cat = $_GET["category"];
+if(isset($_GET["dept_name"]))
+    $deptName = $_GET["dept_name"];
+
+$result = $itemDAO->readByProperty($itemNum, $itemDesc, $cat, $deptName);
 
 $outp = "[";
 foreach($result as $rs) {

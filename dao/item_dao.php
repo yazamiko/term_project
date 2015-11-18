@@ -41,14 +41,28 @@
 		public function read($id) {
 
 		}
-		public function readByProperty($value, $property) {
-			$stmt = $this->conn->prepare("SELECT * FROM Item WHERE $property LIKE :value");
+		public function readByProperty($itemNum, $itemDesc, $cat, $deptName) {
+            $sqlStmt = "";
+            
+            if($itemNum != "")
+                $sqlStmt = $sqlStmt."(ItemNumber LIKE '".$itemNum."%') AND ";
+            
+            if($itemDesc != "")
+                $sqlStmt = $sqlStmt."(ItemDescription LIKE '%".$itemDesc."%') AND ";
+            
+            if($cat != "")
+                $sqlStmt = $sqlStmt."(Category LIKE '%".$cat."%') AND ";
+            
+            if($deptName != "")
+                $sqlStmt = $sqlStmt."(DeptartmentName LIKE '%".$deptName."%') AND ";
+            
+            if($sqlStmt != "")
+                $sqlStmt = substr($sqlStmt, 0, -5);
+            else
+                $sqlStmt = "1";
+            
+            $stmt = $this->conn->prepare("SELECT * FROM Item WHERE ( ".$sqlStmt." )");
 
-			strtoupper($value);
-			if($property == "ItemDescription") $value = "%".$value."%";
-			else $value = $value."%";
-
-			$stmt->bindParam(':value', $value);
 			$stmt->execute();
 			
 			$array = array();

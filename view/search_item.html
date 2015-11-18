@@ -3,8 +3,11 @@
 	<title>Search Item</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	    
+    <script type="text/javascript" src="./js/jquery-2.1.4.js">
+    </script>
 </head>
-<body>
+<body onload="retrieveResult()" >
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -20,30 +23,36 @@
 	</nav>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-10">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
     					<h3 class="panel-title">Search Item</h3>
   					</div>
 					<div class="panel-body">
-						<form action="../controller/select_items_promotion_controller.php" method="post" class="form-horizontal">
-							<div class="form-group">
-								<label class="col-lg-3 control-label">Input</label>
-								<div class="col-lg-7">
-									<input type="text" name="search" id="search" onkeyup="retrieveResult()" class="form-control"> 
+                        <form action="../controller/select_items_promotion_controller.php" method="post" class="form-horizontal"
+                                onsubmit="return validate()">
+							<label class="col-lg-4 control-label">Item Number</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="item_number" id="item_number" onkeyup="retrieveResult()" class="form-control">
+                                    </div>
+								<div class="form-group">
+                                    <label class="col-lg-4 control-label">Item Description</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="item_desc" id="item_desc" onkeyup="retrieveResult()" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Category</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="category" id="category" onkeyup="retrieveResult()" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Department Name</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="dept_name" id="dept_name" onkeyup="retrieveResult()" class="form-control">
+                                    </div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label for="property" class="col-lg-3 control-label">Select</label>
-								<div class="col-lg-7">
-									<select class="form-control" id="property" name="property" onchange="retrieveResult()">
-										<option value="Category">Category</option>
-										<option value="DepartmentName">Department</option>
-										<option value="ItemNumber">Item Number</option>
-										<option value="ItemDescription">Description</option>
-									</select>
-								</div>
-							</div>
 							<button type="submit" class="btn btn-primary">Add to Promotion</button>
 							<h3>Result:</h3>
 							<div id="resultTable"></div>
@@ -54,6 +63,11 @@
 				</div>
 			<!-- col div -->
 			</div>
+			<div class="col-md-2">
+                <h4 id="headErrMsg"></h4>
+                <ul id="errMsg"></ul>
+            </div>
+
 		<!-- row div -->
 		</div>
 		
