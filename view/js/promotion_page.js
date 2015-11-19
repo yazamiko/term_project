@@ -11,10 +11,10 @@ function getQueryVariable(variable)
 
 function retrievePromotion() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "../controller/search_promotion_controller.php";
+    var url = "../controller/search_edit_promo_controller.php";
 
     var search = getQueryVariable('promo_code');
-    var property = "PromoCode";
+ //   var property = "PromoCode";
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -22,7 +22,8 @@ function retrievePromotion() {
         }
     }
 
-    xmlhttp.open("GET", url +"?search=" + search + "&property=" + property, true);
+//    xmlhttp.open("GET", url +"?search=" + search + "&property=" + property, true);
+    xmlhttp.open("GET", url +"?search=" + search, true);
     xmlhttp.send();
 
     retrieveResult();
