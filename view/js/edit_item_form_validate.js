@@ -48,11 +48,11 @@ function checkItemNumber(itemNumber) {
 }
 function checkItemDescription(itemDesc) {
 	var response = {validate: true, errMsg: ""};
-	if(/^.{3,35}$/.test(itemDesc)) {
+	if(/^.{3,50}$/.test(itemDesc)) {
 		return response;
 	} else {
 		response.validate = false;
-		response.errMsg = "<li>Item description must have more than 3 characters and less than 35</li>";
+		response.errMsg = "<li>Item description must have more than 3 characters and less than 50</li>";
 		return response;
 	}
 }
