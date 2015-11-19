@@ -20,12 +20,20 @@
 					 EndDate,  Description, AdType) 
 				VALUES (:event_code, :event_name, :ad_description, :start_date,
 					:end_date, :ad_type)");
-			$stmt->bindParam(':event_code', $ad->getEventCode());
-			$stmt->bindParam(':event_name', $ad->getAdName());
-			$stmt->bindParam(':ad_description', $ad->getAdDescription());
-			$stmt->bindParam(':start_date', $ad->getStartDate());
-			$stmt->bindParam(':end_date', $ad->getEndDate());
-			$stmt->bindParam(':ad_type', $ad->getAdType());
+					
+			$eventCode = $ad->getEventCode();
+			$adName = $ad->getAdName();
+			$adDesc = $ad->getAdDescription();
+			$startDate = $ad->getStartDate();
+			$endDate = $ad->getEndDate();
+			$adType = $ad->getAdType();
+			
+			$stmt->bindParam(':event_code', $eventCode);
+			$stmt->bindParam(':event_name', $adName);
+			$stmt->bindParam(':ad_description', $adDesc);
+			$stmt->bindParam(':start_date', $startDate);
+			$stmt->bindParam(':end_date', $endDate);
+			$stmt->bindParam(':ad_type', $adType);
 			
 			try {
 				$stmt->execute();
@@ -84,29 +92,7 @@
 			}
 			return $array;
 		}
-		public function readByDates($startDate, $endDate) {
-			$stmt = $this->conn->prepare("SELECT * FROM AdEvent WHERE StartDate >= :start AND EndDate <= :end");
-			$stmt->bindParam(':start', $startDate);
-			$stmt->bindParam(':end', $endDate);
-			
-			$stmt->execute();
-			
-			$array = array();
-
-			$rows = $stmt->fetchAll();
-			foreach ($rows as $rs) {
-				$adEvent = new adEvent();
-				$adEvent->setEventCode($rs['EventCode']);
-				$adEvent->setAdName($rs['Name']);
-				$adEvent->setStartDate($rs['StartDate']);
-				$adEvent->setEndDate($rs['EndDate']);
-				$adEvent->setAdDescription($rs['Description']);
-				$adEvent->setAdType($rs['AdType']);
-
-				array_push($array, $adEvent);
-			}
-			return $array;
-		}
+		
 		//update adEvent
 		public function update($adEvent) {
 			session_start();

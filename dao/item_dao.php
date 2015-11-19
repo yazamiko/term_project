@@ -134,7 +134,16 @@
 			$stmt = $this->conn->prepare("INSERT INTO PromotionItem(PromoCode, 
 				ItemNumber, SalePrice) 
 				VALUES ($promoCode, $itemNumber, $purchaseCost)");
-			$stmt->execute();
+			
+			try {
+				$stmt->execute();
+				//prepare an array to json_encode
+				return array('status' => true, 'msg' => 'Item promotion table was successfully updated!');
+			} catch (PDOException $e) {
+				//prepare an array to json_encode
+				return array('status' => false, 'msg' => $e->getMessage() + $eventCodeBefore);
+			}
+			
 		}
 		// Remove Item from Promotion using item number and promotion code
 		public function removeItemFromPromotion($itemNumber, $promoCode) {

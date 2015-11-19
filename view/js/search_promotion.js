@@ -1,3 +1,34 @@
+function sendData(promotion) {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/add_multiple_items_promotion_controller.php";
+    xmlhttp.open("POST", url, true);
+
+    var params = "promo_code=" + promotion;
+
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            getSubmitStatus(xmlhttp.responseText);
+        }
+    }
+
+    xmlhttp.send(params);
+}
+
+function getSubmitStatus(response) {
+    var arr = JSON.parse(response);
+    $('#msgModal').html(arr.msg);
+    $('#myModal').modal('show');
+
+   	if(arr.status) {
+   		$( "#modalButton" ).click(function() {
+  			location.href = "../";
+		});
+   	}
+}
+
+
 function retrievePromotion() {
     var xmlhttp = new XMLHttpRequest();
     var url = "../controller/search_promotion_controller.php?";
@@ -50,7 +81,7 @@ function preparePromotionResult(response) {
         "</td><td>" +
         arr[i].PromoType +
         "</td><td>" +
-        "<a href='../controller/add_multiple_items_promotion_controller.php?promo_code="+ arr[i].PromoCode +"'>Add</a>"+
+		"<button type='reset' class='btn btn-link' role='link' type='submit' name='promo' onclick='sendData(" + arr[i].PromoCode +")'>Add</button>" +
         "</td></tr>";
     }
     out += "</table>";
