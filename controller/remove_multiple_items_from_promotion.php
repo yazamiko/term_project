@@ -1,10 +1,8 @@
 <?php
 require('../dao/item_dao.php');
 
-session_start();
-$arrItemNumbers = $_SESSION['item_number_values'];
-
-$promoCode = $_GET['promo_code'];
+$arrItemNumbers = $_POST['items'];
+$promoCode = $_POST['pcode'];
 
 $itemDAO = new ItemDAO();
 
@@ -13,5 +11,5 @@ foreach ($arrItemNumbers as $itemNumber){
 	echo $itemNumber;
 }
 
-header("Location: ../");
+header("Location: ../view/promotion_page.html?promo_code=" . $promoCode);
 ?>

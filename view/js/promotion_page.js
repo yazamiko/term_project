@@ -1,3 +1,4 @@
+
 function getQueryVariable(variable)
 {
        var query = window.location.search.substring(1);
@@ -7,6 +8,30 @@ function getQueryVariable(variable)
                if(pair[0] == variable){return pair[1];}
        }
        return(false);
+}
+
+function checkBoxChecked()
+{
+    var checkedAtLeastOne = false;
+    $('input[type="checkbox"]').each(function() {
+        if ($(this).is(":checked")) {
+            checkedAtLeastOne = true;
+        }
+    });
+    return checkedAtLeastOne;
+}
+
+function validate()
+{
+    var box = checkBoxChecked();
+    if(box == false)
+    {
+        document.getElementById("headErrMsg").innerHTML 
+            = "Correct the following error:";
+        document.getElementById("errMsg").innerHTML = "<li>Please select at least one item.</li>";
+    }
+    
+    return box;
 }
 
 function retrievePromotion() {
@@ -49,6 +74,7 @@ function retrieveResult() {
     var url = "../controller/promotion_page_controller.php";
 
     var search = getQueryVariable('promo_code');
+    $('#pcode').val(search);
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -73,6 +99,7 @@ function myFunction(response) {
             "<th>Department Name</th>" +
             "<th>Purchase Cost</th>" +
             "<th>Full Retail Price</th>" +
+            "<th>Sale Price</th>" +
             "<th>Remove</th>" +
         "</tr>";
     for(i = 0; i < arr.length; i++) {
@@ -89,6 +116,8 @@ function myFunction(response) {
         arr[i].PurchaseCost +
         "</td><td>" +
         arr[i].FullRetailPrice +
+        "</td><td>" +
+        arr[i].SalePrice +
         "</td><td>" +
         "<input type='checkbox' id='items[]' name='items[]' value="+ arr[i].ItemNumber +">" +
         "</td></tr>" ;

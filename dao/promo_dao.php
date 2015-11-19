@@ -95,7 +95,8 @@
 				$item->setDepartmentName($rs['DepartmentName']);
 				$item->setPurchaseCost($rs['PurchaseCost']);
 				$item->setFullRetailPrice($rs['FullRetailPrice']);
-
+				$item->setSalePrice($rs['SalePrice']);
+				
 				array_push($array, $item);
 			}
 			return $array;

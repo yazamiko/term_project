@@ -14,7 +14,8 @@ foreach($result as $rs) {
     $outp .= '"Category":"'   . $rs->getCategory() . '",';
     $outp .= '"DepartmentName":"'   . $rs->getDepartmentName() . '",';
     $outp .= '"PurchaseCost":"'   . $rs->getPurchaseCost() . '",';
-    $outp .= '"FullRetailPrice":"'. $rs->getFullRetailPrice()  . '"}'; 
+    $outp .= '"FullRetailPrice":"'   . $rs->getFullRetailPrice() . '",';
+    $outp .= '"SalePrice":"'. $rs->getSalePrice()  . '"}'; 
 }
 $outp .="]";
 

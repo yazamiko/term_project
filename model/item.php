@@ -8,6 +8,7 @@
 		private $departmentName;
 		private $purchaseCost;
 		private $fullRetailPrice;
+		private $salePrice;
 
 		//construct
 		public function __construct() {
@@ -74,6 +75,16 @@
 
 		 public function getFullRetailPrice() {
 		 	return $this->fullRetailPrice;
+		 }
+		  /*--------------------
+			Sale Price
+		 ---------------------*/
+		 public function setSalePrice($salePrice) {
+		 	$this->salePrice = $salePrice;
+		 }
+
+		 public function getSalePrice() {
+		 	return $this->salePrice;
 		 }
 	}
 ?>
