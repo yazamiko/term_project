@@ -36,7 +36,7 @@ function preparePromotionResult(response) {
             "<th>Description</th>" +
             "<th>Amount Off</th>" +
             "<th>Promotion Type</th>" +
-            "<th>Add to this Promotion</th>" +
+            "<th>Select Promotion</th>" +
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +

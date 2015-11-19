@@ -65,7 +65,7 @@ function myFunction(response) {
             "<th>Department Name</th>" +
             "<th>Purchase Cost</th>" +
             "<th>Full Retail Price</th>" +
-            "<th>Add</th>" +
+            "<th>Select Item(s)</th>" +
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +
