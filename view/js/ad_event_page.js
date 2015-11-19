@@ -20,7 +20,6 @@ function retrieveResult() {
     var url = "../controller/search_edit_ad_event_controller.php";
 
     var search = getQueryVariable("eventCode");
-    var property = 'EventCode';
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -28,7 +27,7 @@ function retrieveResult() {
         }
     }
 
-    xmlhttp.open("GET", url +"?search=" + search + "&property=" + property, true);
+    xmlhttp.open("GET", url +"?search=" + search, true);
     xmlhttp.send();
 }
 

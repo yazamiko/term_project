@@ -4,7 +4,8 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 $adDAO = new AdDAO();
-$result = $adDAO->readByProperty($_GET["search"], $_GET["property"]);
+
+$result = $adDAO->readByProperty($_GET["search"], "", "", "", "");
 
 session_start();
 
