@@ -54,24 +54,28 @@
 						<h3 class="panel-title">Search Promotion</h3>
 					</div>
 					<div class="panel-body">
-						<form method="post" class="form-horizontal">
+						<form  method="post" class="form-horizontal"
+									onsubmit="return validate()">
 							<div class="form-group">
-								<label class="col-lg-2 control-label">Input</label>
-								<div class="col-lg-6">
-									<input type="text" name="search" id="search" onkeyup="retrievePromotion()" class="form-control"> 
+								<label class="col-lg-3 control-label">Promotion Code</label>
+								<div class="col-lg-7">
+									<input type="text" name="promoCode" id="promoCode" onkeyup="retrievePromotion()" class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-lg-2 control-label">Select</label>
-								<div class="col-lg-6">
-									<select id="property" name="property" class="form-control" onchange="retrievePromotion()">
-										<option value="PromoCode">Promo Code</option>
-										<option value="Name">Name</option>
-										<option value="Description">Description</option>
-									</select>
+								<label class="col-lg-3 control-label">Name</label>
+								<div class="col-lg-7">
+									<input type="text" name="name" id="name" onkeyup="retrievePromotion()" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-3 control-label">Description</label>
+								<div class="col-lg-7">
+									<input type="text" name="description" id="description" onkeyup="retrievePromotion()" class="form-control">
 								</div>
 							</div>
 						</form>
+
 					</div>
 				</div>
 			<!--col div-->

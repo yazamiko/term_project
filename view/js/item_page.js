@@ -18,7 +18,7 @@ function sendToEditPage() {
 
 function retrieveResult() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "../controller/search_item_controller.php";
+    var url = "../controller/search_edit_item_controller.php";
 
     var search = getQueryVariable("item_number");
     var property = 'ItemNumber';
@@ -45,21 +45,34 @@ function myFunction(response) {
 }
 
 function retrievePromotion() {
-    var xmlhttp = new XMLHttpRequest();
-    var url = "../controller/search_promotion_controller.php";
+   var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/search_update_promo_controller.php?";
 
-    var search = document.getElementById("search").value;
-    var property = document.getElementById("property").value;
+    var promoCode = document.getElementById("promoCode").value;
+    var name = document.getElementById("name").value;
+    var description = document.getElementById("description").value;
 
+    if(promoCode != "")
+        url += "promoCode=" + promoCode + "&";
+    if(name != "")
+        url += "name=" + name + "&";
+    if(description != "")
+        url += "description=" + description + "&";
+    
+    url = url.slice(0, -1);
+    
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             preparePromotionResult(xmlhttp.responseText);
         }
     }
 
-    xmlhttp.open("GET", url +"?search=" + search + "&property=" + property, true);
+    xmlhttp.open("GET", url, true);
     xmlhttp.send();
+
+    return false;
 }
+
 function preparePromotionResult(response) {
     var arr = JSON.parse(response);
     var i;

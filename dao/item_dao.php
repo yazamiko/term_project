@@ -54,7 +54,7 @@
                 $sqlStmt = $sqlStmt."(Category LIKE '%".$cat."%') AND ";
             
             if($deptName != "")
-                $sqlStmt = $sqlStmt."(DeptartmentName LIKE '%".$deptName."%') AND ";
+                $sqlStmt = $sqlStmt."(DepartmentName LIKE '%".$deptName."%') AND ";
             
             if($sqlStmt != "")
                 $sqlStmt = substr($sqlStmt, 0, -5);
