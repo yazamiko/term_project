@@ -105,6 +105,14 @@
 		public function read($id) {
 			
 		}
+
+		// Remove Item from Promotion using item number and promotion code
+		public function removePromotionFromAdEvent($promoCode, $eventCode) {
+
+			$stmt = $this->conn->prepare("DELETE FROM AdEventPromotion WHERE EventCode = $eventCode AND PromoCode = $promoCode");
+			$stmt->execute();
+		}
+		
 		//update promo
 		public function update($promo) {
 			session_start();

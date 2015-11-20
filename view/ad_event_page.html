@@ -54,6 +54,18 @@
 			</div>
 		<!--row div-->
 		</div>
+		<h3>Promotions In Ad Event:</h3>
+		<form method="post" action="../controller/remove_multiple_promotion_from_adevent.php" onsubmit="return validate()">
+			<div id="resultTable"></div>
+			<input type="text" id="ecode" name="ecode" hidden>
+			<div class="form-group clearfix">
+				<button class="btn right btn-primary pull-right">Remove <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></button>
+			</div>	
+		</form>
+			<div class="col-md-2">
+           		<h4 id="headErrMsg"></h4>
+            		<ul id="errMsg"></ul>
+        		</div>
 		<footer>
 			<img src="images/wi.png" alt="Web App Dev logo" height="45" width="45" align="right">
 		</footer>

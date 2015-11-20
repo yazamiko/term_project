@@ -9,6 +9,30 @@ function getQueryVariable(variable)
        return(false);
 }
 
+function checkBoxChecked()
+{
+    var checkedAtLeastOne = false;
+    $('input[type="checkbox"]').each(function() {
+        if ($(this).is(":checked")) {
+            checkedAtLeastOne = true;
+        }
+    });
+    return checkedAtLeastOne;
+}
+
+function validate()
+{
+    var box = checkBoxChecked();
+    if(box == false)
+    {
+        document.getElementById("headErrMsg").innerHTML 
+            = "Correct the following error:";
+        document.getElementById("errMsg").innerHTML = "<li>Please select at least one item.</li>";
+    }
+    
+    return box;
+}
+
 function sendToEditPage() {
     var eventCode = getQueryVariable("eventCode");
     location.href = "edit_ad_event_form_ui.html?eventCode=" + eventCode;
@@ -29,6 +53,8 @@ function retrieveResult() {
 
     xmlhttp.open("GET", url +"?search=" + search, true);
     xmlhttp.send();
+
+   retrievePromotion();
 }
 
 function myFunction(response) {
@@ -44,10 +70,10 @@ function myFunction(response) {
 
 function retrievePromotion() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "../controller/search_promotion_controller.php";
+    var url = "../controller/ad_event_page_controller.php";
 
-    var search = document.getElementById("search").value;
-    var property = document.getElementById("property").value;
+    var search = getQueryVariable('eventCode');
+    $('#ecode').val(search);
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -55,13 +81,15 @@ function retrievePromotion() {
         }
     }
 
-    xmlhttp.open("GET", url +"?search=" + search + "&property=" + property, true);
+    xmlhttp.open("GET", url +"?search=" + search, true);
     xmlhttp.send();
+
+    return false;
 }
 function preparePromotionResult(response) {
     var arr = JSON.parse(response);
     var i;
-    var eventCode = getQueryVariable("eventCode");
+//    var eventCode = getQueryVariable("eventCode");
     var out="<table class='table table-striped table-hover'>";
     out += "<tr>" +
             "<th>Promotion Code</th>" +
@@ -69,7 +97,7 @@ function preparePromotionResult(response) {
             "<th>Description</th>" +
             "<th>Amount Off</th>" +
             "<th>Promotion Type</th>" +
-            "<th>Add to this Promotion</th>" +
+            "<th>Remove</th>" +
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +
@@ -83,8 +111,7 @@ function preparePromotionResult(response) {
         "</td><td>" +
         arr[i].PromoType +
         "</td><td>" +
-        "<a href=../controller/add_multiple_ad_events_promotion_controller.php?eventCode="
-        + eventCode +"&promo_code="+ arr[i].PromoCode +">Add</a>"+
+        "<input type='checkbox' id='promotions[]' name='promotions[]' value="+ arr[i].PromoCode +">" +
         "</td></tr>";
     }
     out += "</table>";

@@ -2,6 +2,7 @@
 	require('../interfaces/dao_interface.php');
 	require('../model/ad.php');
 	require('../mysql_conn.php');
+	include_once('../model/promo.php');
 
 	class AdDAO implements iDAO  {
 		//database connection
@@ -89,6 +90,30 @@
 				$adEvent->setAdType($rs['AdType']);
 
 				array_push($array, $adEvent);
+			}
+			return $array;
+		}
+
+		public function readPromotionFromAdEvent($eventCode) {
+			$stmt = $this->conn->prepare("SELECT * FROM Promotion  
+				INNER JOIN AdEventPromotion USING(PromoCode)
+				WHERE EventCode=:event_code");
+
+			$stmt->bindParam(':event_code', $eventCode);
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$promo = new Promo();
+				$promo->setPromoCode($rs['PromoCode']);
+				$promo->setName($rs['Name']);
+				$promo->setDescription($rs['Description']);
+				$promo->setAmountOff($rs['AmountOff']);
+				$promo->setPromoType($rs['PromoType']);
+
+				array_push($array, $promo);
 			}
 			return $array;
 		}
