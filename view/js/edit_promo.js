@@ -28,6 +28,7 @@ function retrieveResult() {
 
 function myFunction(response) {
     var arr = JSON.parse(response);
+		document.getElementById("promo_code").value = arr[0].PromoCode;
 		document.getElementById("name").value = arr[0].Name;
     		document.getElementById("description").value = arr[0].Description;
     		document.getElementById("amount_off").value = arr[0].AmountOff;

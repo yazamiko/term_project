@@ -6,8 +6,8 @@ function sendData() {
     var params = "name=" + document.getElementById("name").value +
     		"&description=" + document.getElementById("description").value +
     		"&amount_off=" + document.getElementById("amount_off").value +
-    		"&promo_type=" + document.getElementById("promo_type").value
-
+    		"&promo_type=" + document.getElementById("promo_type").value;
+			
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xmlhttp.onreadystatechange=function() {
@@ -27,7 +27,7 @@ function getSubmitStatus(response) {
 
    	if(arr.status) {
    		$( "#modalButton" ).click(function() {
-  			 location.href='search_update_promo.html';
+  			 location.href='../view/promotion_page.html?promo_code=' + document.getElementById("promo_code").value;
 		});
    	}
 }
