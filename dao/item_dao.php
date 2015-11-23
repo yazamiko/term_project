@@ -81,6 +81,40 @@
 			}
 			return $array;
 		}
+		
+		public function retrieveItems($arrItemNumbers){
+			$sqlStmt = "";
+			
+			foreach($arrItemNumbers as $itemNumber)
+			{
+				$sqlStmt = $sqlStmt."(ItemNumber = '".$itemNumber."') OR ";
+			}
+			
+			if($sqlStmt != "")
+				$sqlStmt = substr($sqlStmt, 0, -4);
+			else
+				$sqlStmt = "1";
+			
+			$stmt = $this->conn->prepare("SELECT * FROM Item WHERE ( ".$sqlStmt." )");
+			
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$item = new Item();
+				$item->setItemNumber($rs['ItemNumber']);
+				$item->setItemDescription($rs['ItemDescription']);
+				$item->setCategory($rs['Category']);
+				$item->setDepartmentName($rs['DepartmentName']);
+				$item->setPurchaseCost($rs['PurchaseCost']);
+				$item->setFullRetailPrice($rs['FullRetailPrice']);
+
+				array_push($array, $item);
+			}
+			return $array;
+		}
 
 		public function readByItemNumber($itemNumber) {
 			$stmt = $this->conn->prepare("SELECT * FROM Item WHERE ItemNumber = :value");

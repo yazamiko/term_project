@@ -7,7 +7,7 @@
     <script type="text/javascript" src="./js/jquery-2.1.4.js">
     </script>
 </head>
-<body onload="retrievePromotion()">
+<body onload="retrievePromotion(); retrieveItem();">
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -66,8 +66,12 @@
 									<input type="text" name="description" id="description" onkeyup="retrievePromotion()" class="form-control">
 								</div>
 							</div>
+							<h3>Selected Item(s):</h3>
+								<div id="itemTable"></div>
+							<div>
 							<h3>Result:</h3>
                             <div id="resultTable"></div>
+							</div>
 						</form>
 					</div>
 				<!--panel div-->

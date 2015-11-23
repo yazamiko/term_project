@@ -29,6 +29,54 @@ function getSubmitStatus(response) {
 }
 
 
+function retrieveItem() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/display_item_controller.php";
+	
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            myFunction(xmlhttp.responseText);
+        }
+    }
+
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    return false;
+}
+
+function myFunction(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out="<table class='table table-striped table-hover'>";
+    out += "<tr>" +
+            "<th>Item Number</th>" +
+            "<th>Item Description</th>" +
+            "<th>Category</th>" +
+            "<th>Department Name</th>" +
+            "<th>Purchase Cost</th>" +
+            "<th>Full Retail Price</th>" +
+        "</tr>";
+    for(i = 0; i < arr.length; i++) {
+        out += "<tr><td>" +
+        arr[i].ItemNumber +
+        "</td><td>" +
+        arr[i].ItemDescription +
+        "</td><td>" +
+        arr[i].Category +
+        "</td><td>" +
+        arr[i].DepartmentName +
+        "</td><td>" +
+        arr[i].PurchaseCost +
+        "</td><td>" +
+        arr[i].FullRetailPrice +
+        "</td></tr>" ;
+    }
+    out += "</table>";
+    document.getElementById("itemTable").innerHTML = out;
+}
+
+
 function retrievePromotion() {
     var xmlhttp = new XMLHttpRequest();
     var url = "../controller/search_promotion_controller.php?";

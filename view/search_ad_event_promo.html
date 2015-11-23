@@ -7,7 +7,7 @@
 	<script type="text/javascript" src="./js/jquery-2.1.4.js">
 	</script>
 </head>
-<body onload="retrieveAdEvent()">
+<body onload="retrieveAdEvent(); retrievePromotion();">
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -62,8 +62,12 @@
 									</div>
 								</div>
 							<button type="submit" class="btn btn-primary">Add</button>
-							<h3>Result:</h3>
-							<div id="resultTable"></div>
+								<h3>Selected Promotion(s):</h3>
+								<div id="promoTable"></div>
+							<div>
+								<h3>Result:</h3>
+								<div id="resultTable"></div>
+							</div>
 						</form>
 					</div>
 				<!--panel div-->

@@ -22,6 +22,53 @@ function validate()
 	return box;
 }
 
+function retrieveAdEvent() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/display_ad_event_controller.php";
+		
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			adEventResult(xmlhttp.responseText);
+		}
+	}
+		
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+	
+    return false;
+}
+
+function adEventResult(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out="<table class='table table-striped table-hover'>";
+    out += "<tr>" +
+            "<th>Event Code</th>" +
+            "<th>Name</th>" +
+            "<th>Start Date</th>" +
+            "<th>End Date</th>" +
+            "<th>Description</th>" +
+            "<th>Type</th>" +
+        "</tr>";
+    for(i = 0; i < arr.length; i++) {
+        out += "<tr><td>" +
+		arr[i].eventCode +
+        "</td><td>" +
+        arr[i].adName +
+        "</td><td>" +
+		arr[i].startDate +
+        "</td><td>" +
+		arr[i].endDate +
+        "</td><td>" +
+        arr[i].adDescription +
+        "</td><td>" +
+        arr[i].adType +
+		"</td></tr>";
+    }
+    out += "</table>";
+    document.getElementById("adEventTable").innerHTML = out;
+}
+
 function retrievePromotion() {
     var xmlhttp = new XMLHttpRequest();
     var url = "../controller/search_promotion_controller.php?";

@@ -23,6 +23,56 @@ function validate()
 }
 
 
+
+
+
+function retrievePromotion() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/display_promo_controller.php";
+	
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            preparePromotionResult(xmlhttp.responseText);
+        }
+    }
+
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    return false;
+}
+function preparePromotionResult(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out="<table class='table table-striped table-hover'>";
+    out += "<tr>" +
+            "<th>Promotion Code</th>" +
+            "<th>Name</th>" +
+            "<th>Description</th>" +
+            "<th>Amount Off</th>" +
+            "<th>Promotion Type</th>" +
+        "</tr>";
+    for(i = 0; i < arr.length; i++) {
+        out += "<tr><td>" +
+        arr[i].PromoCode +
+        "</td><td>" +
+        arr[i].Name +
+        "</td><td>" +
+        arr[i].Description +
+        "</td><td>" +
+        arr[i].AmountOff +
+        "</td><td>" +
+        arr[i].PromoType +
+        "</td></tr>";
+    }
+    out += "</table>";
+    document.getElementById("promoTable").innerHTML = out;
+}
+
+
+
+
+
 function retrieveAdEvent() {
     var xmlhttp = new XMLHttpRequest();
     var url = "../controller/search_promo_ad_event_controller.php?";

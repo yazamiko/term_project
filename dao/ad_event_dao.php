@@ -93,7 +93,41 @@
 			}
 			return $array;
 		}
+		
+		public function retrieveAdEvents($arrEventCodes){
+			$sqlStmt = "";
+			
+			foreach($arrEventCodes as $eventCode)
+			{
+				$sqlStmt = $sqlStmt."(EventCode = '".$eventCode."') OR ";
+			}
+			
+			if($sqlStmt != "")
+				$sqlStmt = substr($sqlStmt, 0, -4);
+			else
+				$sqlStmt = "1";
+			
+			$stmt = $this->conn->prepare("SELECT * FROM AdEvent WHERE ( ".$sqlStmt." )");
+			
+			$stmt->execute();
+			
+			$array = array();
 
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$adEvent = new adEvent();
+				$adEvent->setEventCode($rs['EventCode']);
+				$adEvent->setAdName($rs['Name']);
+				$adEvent->setStartDate($rs['StartDate']);
+				$adEvent->setEndDate($rs['EndDate']);
+				$adEvent->setAdDescription($rs['Description']);
+				$adEvent->setAdType($rs['AdType']);
+
+				array_push($array, $adEvent);
+			}
+			return $array;
+		}
+		
 		public function readPromotionFromAdEvent($eventCode) {
 			$stmt = $this->conn->prepare("SELECT * FROM Promotion  
 				INNER JOIN AdEventPromotion USING(PromoCode)

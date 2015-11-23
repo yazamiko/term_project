@@ -75,7 +75,40 @@
 			}
 			return $array;
 		}
+		
+		public function retrievePromotions($arrPromoCode){
+			$sqlStmt = "";
+			
+			foreach($arrPromoCode as $promoCode)
+			{
+				$sqlStmt = $sqlStmt."(PromoCode = '".$promoCode."') OR ";
+			}
+			
+			if($sqlStmt != "")
+				$sqlStmt = substr($sqlStmt, 0, -4);
+			else
+				$sqlStmt = "1";
+			
+			$stmt = $this->conn->prepare("SELECT * FROM Promotion WHERE ( ".$sqlStmt." )");
+			
+			$stmt->execute();
+			
+			$array = array();
 
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$promo = new Promo();
+				$promo->setPromoCode($rs['PromoCode']);
+				$promo->setName($rs['Name']);
+				$promo->setDescription($rs['Description']);
+				$promo->setAmountOff($rs['AmountOff']);
+				$promo->setPromoType($rs['PromoType']);
+
+				array_push($array, $promo);
+			}
+			return $array;
+		}
+		
 		public function readItemFromPromotion($promoCode) {
 			$stmt = $this->conn->prepare("SELECT * FROM Item 
 				INNER JOIN PromotionItem USING(ItemNumber) 
@@ -122,11 +155,17 @@
 				Name = :name, Description = :description, 
 				AmountOff = :amount_off, PromoType = :promo_type 
 				WHERE PromoCode = :item_number_before" ); 
+			
+			$promoName=$promo->getName();
+			$promoDesc=$promo->getDescription();
+			$promoAmountOff=$promo->getAmountOff();
+			$promoType=$promo->getPromoType();
+			
 			$stmt->bindParam(':item_number_before', $itemNumberBefore);
-			$stmt->bindParam(':name', $promo->getName());
-			$stmt->bindParam(':description', $promo->getDescription());
-			$stmt->bindParam(':amount_off', $promo->getAmountOff());
-			$stmt->bindParam(':promo_type', $promo->getPromoType());
+			$stmt->bindParam(':name', $promoName);
+			$stmt->bindParam(':description', $promoDesc);
+			$stmt->bindParam(':amount_off', $promoAmountOff);
+			$stmt->bindParam(':promo_type', $promoType);
 			try {
 				$stmt->execute();
 				$update_item = $this->updatePromotionItem($itemNumberBefore);
