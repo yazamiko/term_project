@@ -1,12 +1,12 @@
 <?php
 require('../dao/promo_dao.php');
 
-$arrPromotions = $_POST['promotions'];
+$arrPromoCode = $_POST['promotions'];
 $eventCode = $_POST['ecode'];
 
 $promoDAO = new PromoDAO();
 
-foreach ($arrPromotions as $promoCode){
+foreach ($arrPromoCode as $promoCode){
 	$promoDAO->removePromotionFromAdEvent($promoCode, $eventCode);
 	echo $promoCode;
 }

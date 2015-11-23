@@ -131,7 +131,8 @@
 		public function readPromotionFromAdEvent($eventCode) {
 			$stmt = $this->conn->prepare("SELECT * FROM Promotion  
 				INNER JOIN AdEventPromotion USING(PromoCode)
-				WHERE EventCode=:event_code");
+				WHERE EventCode=:event_code 
+				ORDER BY PromoCode ASC");
 
 			$stmt->bindParam(':event_code', $eventCode);
 			$stmt->execute();

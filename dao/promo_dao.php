@@ -3,6 +3,7 @@
 	require('../model/promo.php');
 	require('../mysql_conn.php');
 	include_once('../model/item.php');
+	include_once('../model/ad.php');
 
 	class PromoDAO implements iDAO  {
 		//database connection
@@ -112,7 +113,8 @@
 		public function readItemFromPromotion($promoCode) {
 			$stmt = $this->conn->prepare("SELECT * FROM Item 
 				INNER JOIN PromotionItem USING(ItemNumber) 
-				WHERE PromoCode=:promo_code");
+				WHERE PromoCode=:promo_code
+				ORDER BY ItemNumber ASC");
 
 			$stmt->bindParam(':promo_code', $promoCode);
 			$stmt->execute();
@@ -142,7 +144,9 @@
 		// Remove Item from Promotion using item number and promotion code
 		public function removePromotionFromAdEvent($promoCode, $eventCode) {
 
-			$stmt = $this->conn->prepare("DELETE FROM AdEventPromotion WHERE EventCode = $eventCode AND PromoCode = $promoCode");
+			$stmt = $this->conn->prepare("DELETE FROM AdEventPromotion WHERE EventCode = :eventCode AND PromoCode = :promoCode");
+			$stmt->bindParam(':eventCode', $eventCode);
+			$stmt->bindParam(':promoCode', $promoCode);
 			$stmt->execute();
 		}
 		
