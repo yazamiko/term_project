@@ -17,6 +17,8 @@ Workflow
 
 ●	Edit promotion information should “loop” like editing item information does
 
+● When editing an Item, if the price is changed then the associated Promotions should recalculate the Sale Price
+
 ●	When adding a promotion to an Ad Event, it would be nice if somewhere it showed what Ad Event you were adding the promotions to
 
 ●	Notes when adding promotions to an Ad Event is good
