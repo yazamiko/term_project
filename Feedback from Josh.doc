@@ -1,27 +1,27 @@
 Feedback from Industrial Partner:
-
 UI
+●	Promotion and Item “Info” screen as great.  Like the list of items within the promotion
+  ○	Adding one for Ad Events and including what promotions are tied to them would be a great addition
 
-•	Your team’s UI was great.  I liked the dark theme as well as the CSS as a whole across the application
+●	Great UI in general
 
-•	Search results screens were also good. I could see all the needed information clearly 
+●	Home screen improvements are good
 
-•	Home screen could be improved  ----------IN PROCESS---------
-  o	Rather than everything in one drop down button, maybe you should break it down by “Areas” like having an “Item”, “Ad     Event”, “Promo”, etc button.  Each with options like Add, Remove, Modify.  Something along those line would help make     the home screen more user friendly  ----------IN PROCESS---------
+●	Condensing the item screen and moving the validation to the right was good.  Much better than needing to scroll
 
-•	“Single Item Information Screen” (from clicking on an item number in the search results screen).  Really like this view  .  The idea is great, and I hope you are planning on making one for a Promotion and an Ad Event.  (Promotion should         include a list of all its Items, Ad Event should include a list of all its Promotions)  ----------FIXED---------
+●	Friendly Error Messages
+  ○	Capturing the errors is good, however you want to make sure that the user to does see a “technical” error message.  You     should capture them and display a “friendly” error message to the user that lets them know what is wrong and how to correct it
+Workflow
 
+●	“Search All” functionality was added on almost all screens
 
-Functionality
+●	Edit promotion information should “loop” like editing item information does
 
-•	Creating an item was great, liked the information at the bottom to tell you what was wrong rather than an alert or a new screen.
-  o	However if you could condense the screen some so a user does not have to scroll that would be ideal ------FIXED------
+●	When adding a promotion to an Ad Event, it would be nice if somewhere it showed what Ad Event you were adding the promotions to
 
-•	Adding a Promotion had an error   ------FIXED---------
+●	Notes when adding promotions to an Ad Event is good
 
-•	Adding an Item to a Promotion worked from the Item View
-  o	However adding multiple items did not work    ----------FIXED-------
+●	Search and update item information was good
 
-•	Search ability was great; the “search-as-you-go” is a nice feature.  Some things to take into consideration
-  o	No way to see all Items/Promotions/Event (Open Search)
-  o	Only have the ability to search on one attribute at a time.  What if I wanted to see all my Bakery Category Items        that have “Donut” in the description?  ------PROMOTION AND AD EVENT FIXED--------
+Overall your team made many improvements in Phase II.  The improvements in functionality made for a great demo with very few issues. Your team has addressed all of my comments from Phase I (other than adding the “Search All” on all searches, but you did add it on most).  Also all required Phase II work was completed and demoed without error.  The UI was great overall, and only had a small issue with the error messages.  I am looking forward to seeing how your reports look and what your team does with the Promotion-Ad Event notes in Phase III.
+
