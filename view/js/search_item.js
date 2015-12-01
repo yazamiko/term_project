@@ -125,7 +125,6 @@ function itemCategoryResult(response) {
     for(i = 0; i < arr.length; i++) {
         out += "<option value='" + arr[i].Category + "'>" + arr[i].Category + "</option>";
     }
-	out += "<option value='other'>OTHER</option>";
     out += "</select>";
     document.getElementById("categoryDropDown").innerHTML = out;
 }
@@ -155,7 +154,6 @@ function itemDepartmentResult(response) {
     for(i = 0; i < arr.length; i++) {
         out += "<option value='" + arr[i].DepartmentName + "'>" + arr[i].DepartmentName + "</option>";
     }
-	out += "<option value='otherDep'>OTHER</option>";
     out += "</select>";
     document.getElementById("deptDropDown").innerHTML = out;
 }
