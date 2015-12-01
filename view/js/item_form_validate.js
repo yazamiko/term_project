@@ -48,10 +48,6 @@ function getSubmitStatus(response) {
    	}
 }
 
-
-
-
-
 function retrieveCategory() {
     var xmlhttp = new XMLHttpRequest();
     var url = "../controller/retrieve_category_controller.php";
@@ -139,11 +135,6 @@ function otherDeptFunc(){
 	}
 	
 }
-
-
-
-
-
 
 /*
 	VALIDATE FUNCTIONS

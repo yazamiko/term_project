@@ -28,8 +28,18 @@ function retrieveResult() {
 	
     var itemNum = document.getElementById("item_number").value;
     var itemDesc = document.getElementById("item_desc").value;
-    var cat = document.getElementById("category").value;
-    var deptName = document.getElementById("dept_name").value;
+	
+	var e = document.getElementById("category");
+	if(e == null)
+		var cat = "";
+	else
+		var cat = e.options[e.selectedIndex].value;
+	
+    var d = document.getElementById("dept_name");
+	if(d == null)
+		var deptName = "";
+	else
+		var deptName = d.options[d.selectedIndex].value;
 
     if(itemNum != "")
         url += "item_num=" + itemNum + "&";
@@ -86,4 +96,66 @@ function myFunction(response) {
     }
     out += "</table>";
     document.getElementById("resultTable").innerHTML = out;
+}
+
+
+
+function retrieveCategory() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/retrieve_category_controller.php";
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			itemCategoryResult(xmlhttp.responseText);
+		}
+	}
+		
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+	
+    return false;
+}
+
+function itemCategoryResult(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out="<select class='form-control' name='category' id='category' onchange='retrieveResult()'>";
+	out += "<option value=''>SELECT CATEGORY</option>";
+	
+    for(i = 0; i < arr.length; i++) {
+        out += "<option value='" + arr[i].Category + "'>" + arr[i].Category + "</option>";
+    }
+	out += "<option value='other'>OTHER</option>";
+    out += "</select>";
+    document.getElementById("categoryDropDown").innerHTML = out;
+}
+
+function retrieveDepartment() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/retrieve_department_controller.php";
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			itemDepartmentResult(xmlhttp.responseText);
+		}
+	}
+		
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+	
+    return false;
+}
+
+function itemDepartmentResult(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out="<select class='form-control' name='dept_name' id='dept_name' onchange='retrieveResult()'>";
+	out += "<option value=''>SELECT DEPARTMENT NAME</option>";
+	
+    for(i = 0; i < arr.length; i++) {
+        out += "<option value='" + arr[i].DepartmentName + "'>" + arr[i].DepartmentName + "</option>";
+    }
+	out += "<option value='otherDep'>OTHER</option>";
+    out += "</select>";
+    document.getElementById("deptDropDown").innerHTML = out;
 }
