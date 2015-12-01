@@ -115,7 +115,35 @@
 			}
 			return $array;
 		}
+		
+		public function loadCategories(){
+			$stmt = $this->conn->prepare("SELECT DISTINCT Category FROM Item WHERE 1");
+			
+			$stmt->execute();
+			
+			$array = array();
 
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				array_push($array, $rs);
+			}
+			return $array;
+		}
+		
+		public function loadDepartment(){
+			$stmt = $this->conn->prepare("SELECT DISTINCT DepartmentName FROM Item WHERE 1");
+			
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				array_push($array, $rs);
+			}
+			return $array;
+		}
+		
 		public function readByItemNumber($itemNumber) {
 			$stmt = $this->conn->prepare("SELECT * FROM Item WHERE ItemNumber = :value");
 

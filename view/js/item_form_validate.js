@@ -2,12 +2,27 @@ function sendData() {
     var xmlhttp = new XMLHttpRequest();
     var url = "../controller/item_form_controller.php";
     xmlhttp.open("POST", url, true);
-
+	
+	var e = document.getElementById("category");
+	var catOption = e.options[e.selectedIndex].value;
+	var d = document.getElementById("dept_name");
+	var deptOption = d.options[d.selectedIndex].value;
+	console.log(deptOption);
+	
     var params = "item_number=" + document.getElementById("item_number").value +
-    		"&item_desc=" + document.getElementById("item_desc").value +
-    		"&category=" + document.getElementById("category").value +
-    		"&dept_name=" + document.getElementById("dept_name").value +
-    		"&purchase_cost=" + document.getElementById("purchase_cost").value +
+    		"&item_desc=" + document.getElementById("item_desc").value;
+	
+	if(catOption == "other")
+		params += "&category=" + document.getElementById("otherText").value.toUpperCase();
+	else
+		params += "&category=" + catOption;
+	
+	if(deptOption == "otherDep")
+		params += "&dept_name=" + document.getElementById("otherDeptText").value.toUpperCase();
+	else
+		params += "&dept_name=" + deptOption;
+	
+	params += "&purchase_cost=" + document.getElementById("purchase_cost").value +
     		"&full_retail_price=" + document.getElementById("full_retail_price").value;
 
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -33,6 +48,103 @@ function getSubmitStatus(response) {
    	}
 }
 
+
+
+
+
+function retrieveCategory() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/retrieve_category_controller.php";
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			itemCategoryResult(xmlhttp.responseText);
+		}
+	}
+		
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+	
+    return false;
+}
+
+function itemCategoryResult(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out="<select class='form-control' name='category' id='category' onchange='otherFunc();'>";
+	
+    for(i = 0; i < arr.length; i++) {
+        out += "<option value='" + arr[i].Category + "'>" + arr[i].Category + "</option>";
+    }
+	out += "<option value='other'>OTHER</option>";
+    out += "</select>";
+    document.getElementById("categoryDropDown").innerHTML = out;
+}
+
+function otherFunc(){
+	var e = document.getElementById("category");
+	var catOption = e.options[e.selectedIndex].value;
+	if(catOption == "other")
+	{
+		document.getElementById("other_text_box").innerHTML = 
+					"<input type='text' name='otherText' id='otherText' class='form-control' placeholder='New Category Name'>";
+	}
+	else
+	{
+		document.getElementById("other_text_box").innerHTML = "";
+	}
+	
+}
+
+function retrieveDepartment() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/retrieve_department_controller.php";
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			itemDepartmentResult(xmlhttp.responseText);
+		}
+	}
+		
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+	
+    return false;
+}
+
+function itemDepartmentResult(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out="<select class='form-control' name='dept_name' id='dept_name' onchange='otherDeptFunc();'>";
+	
+    for(i = 0; i < arr.length; i++) {
+        out += "<option value='" + arr[i].DepartmentName + "'>" + arr[i].DepartmentName + "</option>";
+    }
+	out += "<option value='otherDep'>OTHER</option>";
+    out += "</select>";
+    document.getElementById("deptDropDown").innerHTML = out;
+}
+
+function otherDeptFunc(){
+	var d = document.getElementById("dept_name");
+	var deptOption = d.options[d.selectedIndex].value;
+	if(deptOption == "otherDep")
+	{
+		document.getElementById("other_dept_text_box").innerHTML = 
+					"<input type='text' name='otherDeptText' id='otherDeptText' class='form-control' placeholder='New Department Name'>";
+	}
+	else
+	{
+		document.getElementById("other_dept_text_box").innerHTML = "";
+	}
+	
+}
+
+
+
+
+
+
 /*
 	VALIDATE FUNCTIONS
 */
@@ -56,25 +168,39 @@ function checkItemDescription(itemDesc) {
 		return response;
 	}
 }
-function checkCategory(category) {
+function checkCategory() {
 	var response = {validate: true, errMsg: ""};
-	if(/^[A-Za-z]+([\-\/ ][A-Za-z]*)?$/.test(category)) {
-		return response;
-	} else {
-		response.validate = false;
-		response.errMsg = "<li>Category must have only letters, slash or space</li>";
-		return response;
-	}
+	var e = document.getElementById("category");
+	var catOption = e.options[e.selectedIndex].value;
+	
+	if(catOption == "other")
+	{
+		var category = document.getElementById("otherText").value;
+		if(/^[A-Za-z]+([\-\/ ][A-Za-z]*)?$/.test(category)) {
+			return response;
+		} else {
+			response.validate = false;
+			response.errMsg = "<li>Category must have only letters, slash or space</li>";
+			return response;
+		}
+	} else {return response;}
 }
 function checkDepartmentName(deptName) {
 	var response = {validate: true, errMsg: ""};
-	if(/^[A-Za-z]+([\-\/ ][A-Za-z]*)?$/.test(deptName)) {
-		return response;
-	} else {
-		response.validate = false;
-		response.errMsg = "<li>Department Name must have only letters, slash or space</li>";
-		return response;
-	}
+	var d = document.getElementById("dept_name");
+	var deptOption = d.options[d.selectedIndex].value;
+	
+	if(deptOption == "other")
+	{
+		var deptName = document.getElementById("otherDeptText").value;
+		if(/^[A-Za-z]+([\-\/ ][A-Za-z]*)?$/.test(deptName)) {
+			return response;
+		} else {
+			response.validate = false;
+			response.errMsg = "<li>Department Name must have only letters, slash or space</li>";
+			return response;
+		}
+	} else {return response;}
 }
 function checkPurchaseCost(purchaseCost) {
 	var response = {validate: true, errMsg: ""};
@@ -117,18 +243,16 @@ function validateForm() {
 		validate = false;
 		errMsg += itemDescResponse.errMsg;
 	}
-	//get category from form input
-	var category = document.getElementById("category").value;
+	
 	//check category and get response
-	categoryResponse = checkCategory(category);
+	categoryResponse = checkCategory();
 	if (categoryResponse.validate == false) {
 		validate = false;
 		errMsg += categoryResponse.errMsg;
 	}
-	//get department name from form input
-	var deptName = document.getElementById("dept_name").value;
+	
 	//check department name and get response
-	deptNameResponse = checkDepartmentName(deptName);
+	deptNameResponse = checkDepartmentName();
 	if (deptNameResponse.validate == false) {
 		validate = false;
 		errMsg += deptNameResponse.errMsg;
