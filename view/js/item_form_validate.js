@@ -43,7 +43,7 @@ function getSubmitStatus(response) {
 
    	if(arr.status) {
    		$( "#modalButton" ).click(function() {
-  			location.reload();
+    location.href = "../view/display_item.html?item_number=" + document.getElementById("item_number").value;
 		});
    	}
 }

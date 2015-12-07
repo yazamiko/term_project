@@ -27,7 +27,7 @@ function getSubmitStatus(response) {
 
    	if(arr.status) {
    		$( "#modalButton" ).click(function() {
-  			location.reload();
+		location.href = "../view/display_promotion.html?name=" + document.getElementById("name").value + "&description=" + document.getElementById("description").value;
 		});
    	}
 }

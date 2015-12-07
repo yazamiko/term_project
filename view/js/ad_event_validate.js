@@ -29,7 +29,7 @@ function getSubmitStatus(response) {
 
    	if(arr.status) {
    		$( "#modalButton" ).click(function() {
-  			location.reload();
+  			location.href = "../view/display_ad_event.html?eventCode=" + document.getElementById("event_code").value;
 		});
    	}
 }

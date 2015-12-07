@@ -3,6 +3,7 @@
 	require('../model/ad.php');
 	require('../mysql_conn.php');
 	include_once('../model/promo.php');
+	include_once('../model/adPromo.php');
 
 	class AdDAO implements iDAO  {
 		//database connection
@@ -149,6 +150,39 @@
 				$promo->setPromoType($rs['PromoType']);
 
 				array_push($array, $promo);
+			}
+			return $array;
+		}
+		
+		public function readAdEventPromoCombo($arrEventCode, $arrPromoCode) {
+			$sqlStmt = "";
+			
+			foreach($arrEventCode as $event)
+			{
+				foreach($arrPromoCode as $promo)
+				{
+					$sqlStmt .= "(EventCode='".$event."' AND PromoCode='".$promo."') OR ";
+				}
+			}
+			
+			if($sqlStmt != "")
+				$sqlStmt = substr($sqlStmt, 0, -4);
+			else
+				$sqlStmt = "1";
+			
+			$stmt = $this->conn->prepare("SELECT * FROM AdEventPromotion WHERE (".$sqlStmt.") ORDER BY EventCode ASC");
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$adPromo = new AdPromo();
+				$adPromo->setEventCode($rs['EventCode']);
+				$adPromo->setPromoCode($rs['PromoCode']);
+				$adPromo->setNotes($rs['Notes']);
+				
+				array_push($array, $adPromo);
 			}
 			return $array;
 		}
