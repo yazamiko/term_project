@@ -72,8 +72,34 @@
 				$sqlStmt = substr($sqlStmt, 0, -5);
 			else
 				$sqlStmt = "1";
-			
+
 			$stmt = $this->conn->prepare("SELECT * FROM AdEvent WHERE ( ".$sqlStmt." )");
+			
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$adEvent = new adEvent();
+				$adEvent->setEventCode($rs['EventCode']);
+				$adEvent->setAdName($rs['Name']);
+				$adEvent->setStartDate($rs['StartDate']);
+				$adEvent->setEndDate($rs['EndDate']);
+				$adEvent->setAdDescription($rs['Description']);
+				$adEvent->setAdType($rs['AdType']);
+
+				array_push($array, $adEvent);
+			}
+			return $array;
+		}
+
+		public function readByDate($startDate, $endDate) {
+
+			$st = "StartDate >= '" . $startDate . "' AND EndDate <= '" . $endDate."'";
+			$sql = "SELECT * FROM AdEvent WHERE (". $st .")";
+			//echo $sql;
+			$stmt = $this->conn->prepare($sql);
 			
 			$stmt->execute();
 			
