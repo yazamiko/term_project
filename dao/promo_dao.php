@@ -138,6 +138,34 @@
 			return $array;
 		}
 		
+		public function readPromotionItem($itemNumber) {
+			$stmt = $this->conn->prepare("SELECT PromoCode, ItemNumber, ItemDescription, 
+				FullRetailPrice, SalePrice FROM PromotionItem 
+				INNER JOIN Item USING(ItemNumber) 
+				WHERE ItemNumber=:item_number
+				ORDER BY (Item.FullRetailPrice - PromotionItem.SalePrice) Desc");
+			
+			$stmt->bindParam(':item_number', $itemNumber);
+			$stmt->execute();
+	
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			echo $rows;
+
+			foreach ($rows as $rs) {
+				$promo = new Promo();
+				$promo->setPromoCode($rs['PromoCode']);
+				$promo->setItemNumber($rs['ItemNumber']);
+				$promo->setItemDescription($rs['Description']);
+				$promo->setFullRetailPrice($rs['FullRetailPrice']);
+				$promo->setSalePrice($rs['SalePrice']);
+				
+				array_push($array, $promo);
+			}
+			return $array;
+		}
+		
 		public function readItemFromPromotion($promoCode) {
 			$stmt = $this->conn->prepare("SELECT * FROM Item 
 				INNER JOIN PromotionItem USING(ItemNumber) 
