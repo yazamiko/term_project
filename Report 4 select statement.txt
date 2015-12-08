@@ -1,0 +1,7 @@
+SELECT Item.ItemNumber, PromotionItem.PromoCode, Item.FullRetailPrice, PromotionItem.SalePrice
+FROM Item
+INNER JOIN PromotionItem ON Item.ItemNumber = PromotionItem.ItemNumber
+ORDER BY (
+Item.FullRetailPrice - PromotionItem.SalePrice
+) DESC 
+LIMIT 0 , 50
