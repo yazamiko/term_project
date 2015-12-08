@@ -3,6 +3,7 @@
 	require('../model/ad.php');
 	require('../mysql_conn.php');
 	include_once('../model/promo.php');
+	include_once('../model/adPromo.php');
 
 	class AdDAO implements iDAO  {
 		//database connection
@@ -179,6 +180,39 @@
 			return $array;
 		}
 		
+		public function readAdEventPromoCombo($arrEventCode, $arrPromoCode) {
+			$sqlStmt = "";
+			
+			foreach($arrEventCode as $event)
+			{
+				foreach($arrPromoCode as $promo)
+				{
+					$sqlStmt .= "(EventCode='".$event."' AND PromoCode='".$promo."') OR ";
+				}
+			}
+			
+			if($sqlStmt != "")
+				$sqlStmt = substr($sqlStmt, 0, -4);
+			else
+				$sqlStmt = "1";
+			
+			$stmt = $this->conn->prepare("SELECT * FROM AdEventPromotion WHERE (".$sqlStmt.") ORDER BY EventCode ASC");
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$adPromo = new AdPromo();
+				$adPromo->setEventCode($rs['EventCode']);
+				$adPromo->setPromoCode($rs['PromoCode']);
+				$adPromo->setNotes($rs['Notes']);
+				
+				array_push($array, $adPromo);
+			}
+			return $array;
+		}
+		
 		//update adEvent
 		public function update($adEvent) {
 			session_start();
@@ -215,6 +249,14 @@
 		}
 		public function addEventToPromotion($eventCode, $promoCode, $notes)
 		{
+			$stmt = $this->conn->prepare("SELECT * from AdEventPromotion WHERE PromoCode=$promoCode");
+			$stmt->execute();
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			if (!empty($row)) {
+				return array('status' => false, 'msg' => "This promotion is already included in this Ad Event");
+			}
+			else {
+
 			$stmt = $this->conn->prepare("INSERT INTO AdEventPromotion(EventCode,  
 				PromoCode, Notes) VALUES ('$eventCode', '$promoCode', '$notes')");
 			
@@ -225,6 +267,7 @@
 			} catch (PDOException $e) {
 				//prepare an array to json_encode
 				return array('status' => false, 'msg' => $e->getMessage() + $eventCodeBefore);
+			}
 			}
 		}
 		//delete adEvent from database using its id

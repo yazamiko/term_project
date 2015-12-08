@@ -9,21 +9,21 @@ function sendData(promotion) {
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            getSubmitStatus(xmlhttp.responseText);
+            getSubmitStatus(xmlhttp.responseText, promotion);
         }
     }
 
     xmlhttp.send(params);
 }
 
-function getSubmitStatus(response) {
+function getSubmitStatus(response, promotion) {
     var arr = JSON.parse(response);
     $('#msgModal').html(arr.msg);
     $('#myModal').modal('show');
 
    	if(arr.status) {
    		$( "#modalButton" ).click(function() {
-  			location.href = "../";
+  			location.href = "../view/display_item_promotion.html?promo_code=" + promotion;
 		});
    	}
 }

@@ -115,7 +115,7 @@
 				INNER JOIN PromotionItem USING(ItemNumber) 
 				WHERE PromoCode=:promo_code
 				ORDER BY ItemNumber ASC");
-
+			
 			$stmt->bindParam(':promo_code', $promoCode);
 			$stmt->execute();
 			

@@ -60,11 +60,11 @@ function checkDescription(description) {
 
 function checkAmountOff(amountOff) {
 	var response = {validate: true, errMsg: ""};
-	if(/^(\d{1}(\.\d{2})?)$|^(\.\d{2})$/.test(amountOff)) {
+	if(/^(\d{1}(\.\d{2})?)$|^(\.\d{2})|^(\d{1,2})$/.test(amountOff)) {
 		return response;
 	} else {
 		response.validate = false;
-		response.errMsg = "<li>Amount off must be 1 digit followed by decimal which is followed by 2 digits, or a decimal followed by 2 digits </li>";
+		response.errMsg = "<li>Amount off can be 1 digit followed by decimal which is followed by 2 digits, or a decimal followed by 2 digits, just 2 digits </li>";
 		return response;
 	}
 }
