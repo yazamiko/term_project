@@ -36,6 +36,34 @@
 				return array('status' => false, 'msg' => $e->getMessage());
 			}
 		}
+		public function readByAmountAndType($amountOff, $typeValue) {
+			$sqlStmt = "AmountOff = :amountOff AND PromoType = :typeValue";
+			
+			$stmt = $this->conn->prepare("SELECT * FROM Promotion WHERE ( ".$sqlStmt." )");
+			$stmt->bindParam(':amountOff', $amountOff);
+			$stmt->bindParam(':typeValue', $typeValue);
+			
+			//$sql = "SELECT * FROM Promotion WHERE ( ".$sqlStmt." )");
+			//$stmt = $this->conn->prepare($sql);
+			
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$promo = new Promo();
+				$promo->setPromoCode($rs['PromoCode']);
+				$promo->setName($rs['Name']);
+				$promo->setDescription($rs['Description']);
+				$promo->setAmountOff($rs['AmountOff']);
+				$promo->setPromoType($rs['PromoType']);
+
+				array_push($array, $promo);
+			}
+			return $array;
+		}
+
 		public function readByProperty($promoCode, $name, $description) {
 			$sqlStmt = "";
 			

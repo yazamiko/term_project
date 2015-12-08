@@ -2,13 +2,13 @@ function retrieveResult() {
     var xmlhttp = new XMLHttpRequest();
     var url = "../controller/report1_controller.php";
     xmlhttp.open("POST", url, true);
-	
+    
     var start_date = document.getElementById("start_date").value;
     var end_date = document.getElementById("end_date").value;
-	var params = "start_date="+start_date+"&end_date="+end_date;
+    var params = "start_date="+start_date+"&end_date="+end_date;
 
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	
+    
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             alert(xmlhttp.responseText);
