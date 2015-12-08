@@ -223,6 +223,14 @@
 		}
 		public function addEventToPromotion($eventCode, $promoCode, $notes)
 		{
+			$stmt = $this->conn->prepare("SELECT * from AdEventPromotion WHERE PromoCode=$promoCode");
+			$stmt->execute();
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			if (!empty($row)) {
+				return array('status' => false, 'msg' => "This promotion is already included in this Ad Event");
+			}
+			else {
+
 			$stmt = $this->conn->prepare("INSERT INTO AdEventPromotion(EventCode,  
 				PromoCode, Notes) VALUES ('$eventCode', '$promoCode', '$notes')");
 			
@@ -233,6 +241,7 @@
 			} catch (PDOException $e) {
 				//prepare an array to json_encode
 				return array('status' => false, 'msg' => $e->getMessage() + $eventCodeBefore);
+			}
 			}
 		}
 		//delete adEvent from database using its id

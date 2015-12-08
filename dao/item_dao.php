@@ -33,9 +33,8 @@
 				return array('status' => true, 'msg' => 'Item was successfully added!');
 			} catch (PDOException $e) {
 				//prepare an array to json_encode
-				return array('status' => false, 'msg' => $e->getMessage());
+				return array('status' => false, 'msg' => "This item already exists");
 			}
-			
 		}
 		//retrieve item from database using its id
 		public function read($id) {
@@ -168,6 +167,13 @@
 		}
 		// add item to promotion using item number and promotion code
 		public function addItemToPromotion($itemNumber, $promoCode) {
+			$stmt = $this->conn->prepare("SELECT * from PromotionItem WHERE ItemNumber=$itemNumber");
+			$stmt->execute();
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			if (!empty($row)) {
+				return array('status' => false, 'msg' => "This item is already included in this promotion");
+			}
+			else {
 			/*
 				Get AmountOff and PromoType from Promotion (it's needed to calculate the new retail price)
 			*/
@@ -204,7 +210,7 @@
 				//prepare an array to json_encode
 				return array('status' => false, 'msg' => $e->getMessage() + $eventCodeBefore);
 			}
-			
+			}
 		}
 		// Remove Item from Promotion using item number and promotion code
 		public function removeItemFromPromotion($itemNumber, $promoCode) {

@@ -195,21 +195,21 @@ function checkDepartmentName(deptName) {
 }
 function checkPurchaseCost(purchaseCost) {
 	var response = {validate: true, errMsg: ""};
-	if(/^\d+\.\d{2}$/.test(purchaseCost)) {
+	if(/^\d+(\.\d{2})?$/.test(purchaseCost)) {
 		return response;
 	} else {
 		response.validate = false;
-		response.errMsg = "<li>Purchase cost must contain only numbers followed by period and 2 digits after the period</li>";
+		response.errMsg = "<li>Purchase cost may contain only numbers or numbers followed by period and 2 digits after the period</li>";
 		return response;
 	}
 }
 function checkFullRetailPrice(fullRetailPrice) {
 	var response = {validate: true, errMsg: ""};
-	if(/^\d+\.\d{2}$/.test(fullRetailPrice)) {
+	if(/^\d+(\.\d{2})?$/.test(fullRetailPrice)) {
 		return response;
 	} else {
 		response.validate = false;
-		response.errMsg = "<li>Full retail price must contain only numbers followed by period and 2 digits after the period</li>";
+		response.errMsg = "<li>Full retail price may contain only numbers or numbers followed by period and 2 digits after the period</li>";
 		return response;
 	}
 }
