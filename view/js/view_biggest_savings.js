@@ -66,6 +66,7 @@ function preparePromotionResult(response) {
             "<th>Description</th>" +
             "<th>Full Retail Price</th>" +
             "<th>Sale Price</th>" +
+            "<th>Saving</th>" +
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         var diff = arr[i].FullRetailPrice - arr[i].SalePrice;
@@ -74,7 +75,7 @@ function preparePromotionResult(response) {
         "</td><td>" +
         arr[i].ItemNumber +
         "</td><td>" +
-        arr[i].Description +
+        arr[i].ItemDescription +
         "</td><td>" +
         arr[i].FullRetailPrice +
         "</td><td>" +

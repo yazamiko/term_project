@@ -153,7 +153,6 @@
 			$array = array();
 
 			$rows = $stmt->fetchAll();
-			echo $rows;
 
 			foreach ($rows as $rs) {
 				$promo = new ItemPromo();
