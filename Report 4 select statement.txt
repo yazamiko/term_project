@@ -1,4 +1,4 @@
-SELECT Item.ItemNumber, PromotionItem.PromoCode, Item.FullRetailPrice, PromotionItem.SalePrice
+SELECT Item.ItemNumber, PromotionItem.PromoCode, Item.FullRetailPrice, PromotionItem.SalePrice, (Item.FullRetailPrice - PromotionItem.SalePrice) as Saving
 FROM Item
 INNER JOIN PromotionItem ON Item.ItemNumber = PromotionItem.ItemNumber
 ORDER BY (
