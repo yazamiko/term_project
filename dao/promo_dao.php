@@ -3,6 +3,7 @@
 	require('../model/promo.php');
 	require('../mysql_conn.php');
 	include_once('../model/item.php');
+	include_once('../model/itemPromo.php');
 	include_once('../model/ad.php');
 
 	class PromoDAO implements iDAO  {
@@ -154,17 +155,18 @@
 			echo $rows;
 
 			foreach ($rows as $rs) {
-				$promo = new Promo();
-				$promo->setPromoCode($rs['PromoCode']);
-				$promo->setItemNumber($rs['ItemNumber']);
-				$promo->setItemDescription($rs['Description']);
-				$promo->setFullRetailPrice($rs['FullRetailPrice']);
-				$promo->setSalePrice($rs['SalePrice']);
+				$itemPromo = new ItemPromo();
+				$itemPromo->setPromoCode($rs['PromoCode']);
+				$itemPromo->setItemNumber($rs['ItemNumber']);
+				$itemPromo->setItemDescription($rs['ItemDescription']);
+				$itemPromo->setFullRetailPrice($rs['FullRetailPrice']);
+				$itemPromo->setSalePrice($rs['SalePrice']);
 				
-				array_push($array, $promo);
+				array_push($array, $itemPromo);
 			}
 			return $array;
 		}
+
 		
 		public function readItemFromPromotion($promoCode) {
 			$stmt = $this->conn->prepare("SELECT * FROM Item 
