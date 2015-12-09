@@ -18,6 +18,7 @@ function retrieveResult() {
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            alert(xmlhttp.responseText);
             myFunction(xmlhttp.responseText);
         }
     }
@@ -45,11 +46,7 @@ function retrievePromotion() {
     
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-<<<<<<< HEAD
 		  //alert(xmlhttp.responseText);
-=======
-		//alert(xmlhttp.responseText);
->>>>>>> 82a59ccb2b8cd823b3912407aaf4bfdf48bbc5da
             preparePromotionResult(xmlhttp.responseText);
         }
     }
