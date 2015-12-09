@@ -145,7 +145,7 @@
 				FullRetailPrice, SalePrice FROM PromotionItem 
 				INNER JOIN Item USING(ItemNumber) 
 				WHERE ItemNumber=:item_number
-				ORDER BY (Item.FullRetailPrice - PromotionItem.SalePrice) Desc");
+				ORDER BY (Item.FullRetailPrice - PromotionItem.SalePrice) Desc LIMIT 1");
 			
 			$stmt->bindParam(':item_number', $item);
 			$stmt->execute();
