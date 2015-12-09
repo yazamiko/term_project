@@ -37,7 +37,7 @@
 		/*--------------------
 		    Item Description
 		 ---------------------*/
-		public function setItemNumber($itemDescription) {
+		public function setItemDescription($itemDescription) {
 			$this->itemDescription = $itemDescription;
 		}
 

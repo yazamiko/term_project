@@ -5,6 +5,7 @@
 	include_once('../model/item.php');
 	include_once('../model/itemPromo.php');
 	include_once('../model/ad.php');
+	ini_set('display_errors', 1);
 
 	class PromoDAO implements iDAO  {
 		//database connection
@@ -138,15 +139,15 @@
 			}
 			return $array;
 		}
-		
-		public function readPromotionItem($itemNumber) {
+			
+		public function readPromotionItem($item) {
 			$stmt = $this->conn->prepare("SELECT PromoCode, ItemNumber, ItemDescription, 
 				FullRetailPrice, SalePrice FROM PromotionItem 
 				INNER JOIN Item USING(ItemNumber) 
 				WHERE ItemNumber=:item_number
 				ORDER BY (Item.FullRetailPrice - PromotionItem.SalePrice) Desc");
 			
-			$stmt->bindParam(':item_number', $itemNumber);
+			$stmt->bindParam(':item_number', $item);
 			$stmt->execute();
 	
 			$array = array();
@@ -155,18 +156,17 @@
 			echo $rows;
 
 			foreach ($rows as $rs) {
-				$itemPromo = new ItemPromo();
-				$itemPromo->setPromoCode($rs['PromoCode']);
-				$itemPromo->setItemNumber($rs['ItemNumber']);
-				$itemPromo->setItemDescription($rs['ItemDescription']);
-				$itemPromo->setFullRetailPrice($rs['FullRetailPrice']);
-				$itemPromo->setSalePrice($rs['SalePrice']);
+				$promo = new ItemPromo();
+				$promo->setPromoCode($rs['PromoCode']);
+				$promo->setItemNumber($rs['ItemNumber']);
+				$promo->setItemDescription($rs['ItemDescription']);
+				$promo->setFullRetailPrice($rs['FullRetailPrice']);
+				$promo->setSalePrice($rs['SalePrice']);
 				
-				array_push($array, $itemPromo);
+				array_push($array, $promo);
 			}
 			return $array;
 		}
-
 		
 		public function readItemFromPromotion($promoCode) {
 			$stmt = $this->conn->prepare("SELECT * FROM Item 
