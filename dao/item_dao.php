@@ -167,7 +167,7 @@
 		}
 		// add item to promotion using item number and promotion code
 		public function addItemToPromotion($itemNumber, $promoCode) {
-			$stmt = $this->conn->prepare("SELECT * from PromotionItem WHERE ItemNumber=$itemNumber");
+			$stmt = $this->conn->prepare("SELECT * from PromotionItem WHERE PromoCode='".$promoCode."' AND ItemNumber='".$itemNumber."'");
 			$stmt->execute();
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			if (!empty($row)) {
