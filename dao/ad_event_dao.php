@@ -249,7 +249,7 @@
 		}
 		public function addEventToPromotion($eventCode, $promoCode, $notes)
 		{
-			$stmt = $this->conn->prepare("SELECT * from AdEventPromotion WHERE EventCode=$eventCode AND PromoCode=$promoCode");
+			$stmt = $this->conn->prepare("SELECT * from AdEventPromotion WHERE EventCode='".$eventCode."' AND PromoCode='".$promoCode."'");
 			$stmt->execute();
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			if (!empty($row)) {
