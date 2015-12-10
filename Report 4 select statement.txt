@@ -1,7 +1,11 @@
-SELECT Item.ItemNumber, PromotionItem.PromoCode, Item.FullRetailPrice, PromotionItem.SalePrice, (Item.FullRetailPrice - PromotionItem.SalePrice) as Saving
+SELECT Item.ItemNumber, PromotionItem.PromoCode, Item.FullRetailPrice, 
+(ROUND(PromotionItem.SalePrice, 2)) as SalePrice, (ROUND(Item.FullRetailPrice - PromotionItem.SalePrice, 2)) as Savings,
+GROUP_CONCAT(DISTINCT AdEventPromotion.EventCode SEPARATOR ', ') AS EventCodes
 FROM Item
 INNER JOIN PromotionItem ON Item.ItemNumber = PromotionItem.ItemNumber
+INNER JOIN AdEventPromotion ON PromotionItem.PromoCode = AdEventPromotion.PromoCode
+GROUP BY Item.ItemNumber
 ORDER BY (
-Item.FullRetailPrice - PromotionItem.SalePrice
+ROUND(Item.FullRetailPrice - PromotionItem.SalePrice, 2)
 ) DESC 
 LIMIT 0 , 50
