@@ -26,8 +26,12 @@
 					:promo_type)");
 			$stmt->bindParam(':name', $promo->getName());
 			$stmt->bindParam(':description', $promo->getDescription());
-			$stmt->bindParam(':amount_off', $promo->getAmountOff());
+			$stmt->bindParam(':amount_off', $amountOff);
 			$stmt->bindParam(':promo_type', $promo->getPromoType());
+
+			$amount_off = $promo->getAmountOff();
+			$number = 100;
+			$amountOff = ($amount_off / $number);
 			
 			try {
 				$stmt->execute();
@@ -71,6 +75,7 @@
 			}
 			return $array;
 		}
+
 
 		public function readByProperty($promoCode, $name, $description) {
 			$sqlStmt = "";
@@ -243,8 +248,12 @@
 			$stmt->bindParam(':item_number_before', $itemNumberBefore);
 			$stmt->bindParam(':name', $promoName);
 			$stmt->bindParam(':description', $promoDesc);
-			$stmt->bindParam(':amount_off', $promoAmountOff);
+			$stmt->bindParam(':amount_off', $amountOff);
 			$stmt->bindParam(':promo_type', $promoType);
+
+			$number = 100;
+			$amountOff = ($promoAmountOff / $number);
+			
 			try {
 				$stmt->execute();
 				$update_item = $this->updatePromotionItem($itemNumberBefore);
