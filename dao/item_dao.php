@@ -185,24 +185,23 @@
 			$promoType = $row['PromoType'];
 			$amountOff = floatval($row['AmountOff']);
 			/*
-				Get retailPrice from Item (it's needed to calculate the new retail price)
+				Get PurchaseCost from Item (it's needed to calculate the new retail price)
 			*/
 			$stmt = $this->conn->prepare("SELECT FullRetailPrice
 				FROM Item WHERE ItemNumber=$itemNumber");
 			$stmt->execute();
 
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			$retailPrice = floatval($row['FullRetailPrice']);
-			$percent = 100;
-			$amount_off = ($amountOff / $percent);
+			$purchaseCost = floatval($row['FullRetailPrice']);
+			$purchaseCost;
 
 			//Update new sale price based on promotion type
-			if($promoType == 'Dollar') $retailPrice -= $amountOff;
-			else $retailPrice -= ($retailPrice * $amount_off);
-
+			if($promoType == 'Dollar') $purchaseCost -= $amountOff;
+			else $purchaseCost -= ($purchaseCost * $amountOff);
+			
 			$stmt = $this->conn->prepare("INSERT INTO PromotionItem(PromoCode, 
 				ItemNumber, SalePrice) 
-				VALUES ($promoCode, $itemNumber, $retailPrice)");
+				VALUES ($promoCode, $itemNumber, $purchaseCost)");
 			
 			try {
 				$stmt->execute();
