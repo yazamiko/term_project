@@ -1,9 +1,9 @@
 <?php
 	class MySQLConnection {
 		public static function getConnection(){
-			$servername = "localhost";
-			$username = "root";
-			$password = "root";
+			$servername = "csdb.brockport.edu";
+			$username = "gbarb2";
+			$password = "river123";
 			$dbname = "gbarb2_fall15_1";
 			
 			$conn=null;

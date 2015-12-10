@@ -195,8 +195,14 @@
 				$promo->setPromoCode($rs['PromoCode']);
 				$promo->setName($rs['Name']);
 				$promo->setDescription($rs['Description']);
-				$promo->setAmountOff($rs['AmountOff']);
 				$promo->setPromoType($rs['PromoType']);
+				if($rs['PromoType'] == "Percent") {
+					$tmp = $rs['AmountOff']*100;
+					$tmp .= "%";
+					$promo->setAmountOff($tmp);
+				} else {
+					$promo->setAmountOff($rs['AmountOff']);
+				}
 
 				array_push($array, $promo);
 			}
