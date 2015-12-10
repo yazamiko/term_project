@@ -18,7 +18,7 @@ function retrieveResult() {
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            alert(xmlhttp.responseText);
+            //alert(xmlhttp.responseText);
             myFunction(xmlhttp.responseText);
         }
     }
@@ -58,33 +58,47 @@ function retrievePromotion() {
 }
 function preparePromotionResult(response) {
     var arr = JSON.parse(response);
-    var i;
-//    var eventCode = getQueryVariable("eventCode");
-    var out="<table class='table table-striped table-hover'>";
-    out += "<tr>" +
-            "<th>Promotion Code</th>" +
-            "<th>Item Number</th>" +
-            "<th>Description</th>" +
-            "<th>Full Retail Price</th>" +
-            "<th>Sale Price</th>" +
-            "<th>Saving</th>" +
-        "</tr>";
-    for(i = 0; i < arr.length; i++) {
-        var diff = arr[i].FullRetailPrice - arr[i].SalePrice;
-        out += "<tr><td>" +
-        arr[i].PromoCode +
-        "</td><td>" +
-        arr[i].ItemNumber +
-        "</td><td>" +
-        arr[i].ItemDescription +
-        "</td><td>" +
-        arr[i].FullRetailPrice +
-        "</td><td>" +
-        arr[i].SalePrice +
-        "</td><td>"+
-        diff +
-        "</td></tr>";
+
+    if(arr.length > 0) {
+      promoCode = arr[0].PromoCode;
+
+      var salePrice = parseFloat(arr[0].SalePrice);
+      var diff = arr[0].FullRetailPrice - arr[0].SalePrice;
+      
+      document.getElementById("promo_code").innerHTML = promoCode;
+      document.getElementById("sale_price").innerHTML = salePrice.toFixed(2);
+      document.getElementById("saving").innerHTML = diff.toFixed(2);
+
+      retrieveAdEvent(promoCode);
     }
-    out += "</table>";
-    document.getElementById("resultTable").innerHTML = out;
+
+}
+
+function retrieveAdEvent(promoCode) {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/adevent_from_biggest_savings_controller.php";
+
+    var search = promoCode;
+    
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          //alert(xmlhttp.responseText);
+            prepareEventResult(xmlhttp.responseText);
+        }
+    }
+
+    url += "?search=" + search;
+
+    xmlhttp.open("GET", url , true);
+    xmlhttp.send();
+}
+
+function prepareEventResult(response) {
+    //alert(response);
+    var arr = JSON.parse(response);
+    //    var eventCode = getQueryVariable("eventCode");
+   if(arr.length > 0) {
+      document.getElementById("event_code").innerHTML = arr[0].eventCode;
+      document.getElementById("event_name").innerHTML = arr[0].adName;
+   }
 }

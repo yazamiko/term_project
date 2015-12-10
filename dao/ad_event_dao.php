@@ -96,6 +96,28 @@
 			return $array;
 		}
 
+		public function readByPromoCode($promoCode) {
+			$stmt = $this->conn->prepare("SELECT * FROM AdEvent INNER JOIN AdEventPromotion USING (EventCode) WHERE PromoCode = :pcode");
+			$stmt->bindParam(':pcode', $promoCode);
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$adEvent = new adEvent();
+				$adEvent->setEventCode($rs['EventCode']);
+				$adEvent->setAdName($rs['Name']);
+				$adEvent->setStartDate($rs['StartDate']);
+				$adEvent->setEndDate($rs['EndDate']);
+				$adEvent->setAdDescription($rs['Description']);
+				$adEvent->setAdType($rs['AdType']);
+
+				array_push($array, $adEvent);
+			}
+			return $array;
+		}
+
 		public function readByDate($startDate, $endDate) {
 
 			$st = "StartDate >= '" . $startDate . "' AND EndDate <= '" . $endDate."'";
