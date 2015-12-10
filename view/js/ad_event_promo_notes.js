@@ -21,12 +21,13 @@ function getSubmitStatus(response) {
     $('#msgModal').html(arr.msg);
     $('#myModal').modal('show');
 
-   	if(arr.status) {
-   		$( "#modalButton" ).click(function() {
-  			location.href = "../view/display_ad_event_promotion.html";
-		});
-   	}
-}
+	$( "#modalButton" ).click(function() {
+		if(arr.status == false)
+			location.href = window.history.back();
+		else if(arr.status == true)
+			location.href = "../view/display_ad_event_promotion.html";
+	});
+ }
 
 function noNotes()
 {

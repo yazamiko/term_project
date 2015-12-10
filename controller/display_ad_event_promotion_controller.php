@@ -4,8 +4,22 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 session_start();
-$arrEventCode = $_SESSION['ad_event_values'];
+
+if(isset($_GET["event_code"]))
+{
+	$arrEventCode = array($_GET["event_code"]);
+}
+else
+	$arrEventCode = $_SESSION['ad_event_values'];
+if(isset($_GET["promo_code"]))
+{
+	$arrPromoCode = array($_GET["promo_code"]);
+}
+else
 $arrPromoCode = $_SESSION['ad_event_promo_code'];
+
+//$arrEventCode = $_SESSION['ad_event_values'];
+//$arrPromoCode = $_SESSION['ad_event_promo_code'];
 
 $adDAO = new AdDAO();
 $result = $adDAO->readAdEventPromoCombo($arrEventCode, $arrPromoCode);

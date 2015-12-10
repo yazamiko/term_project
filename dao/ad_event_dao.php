@@ -4,6 +4,7 @@
 	require('../mysql_conn.php');
 	include_once('../model/promo.php');
 	include_once('../model/adPromo.php');
+	include_once('../model/top50.php');
 
 	class AdDAO implements iDAO  {
 		//database connection
@@ -247,6 +248,25 @@
 				return array('status' => false, 'msg' => $e->getMessage() + $eventCodeBefore);
 			}
 		}
+		public function updateEventPromotion($eventCode, $promoCode, $notes)
+		{
+			//this function only updates the notes in the table
+			$stmt = $this->conn->prepare("UPDATE AdEventPromotion 
+				SET Notes = :notes WHERE EventCode = :event_code AND PromoCode = :promo_code");
+			
+			$stmt->bindParam(':event_code', $eventCode);
+			$stmt->bindParam(':promo_code', $promoCode);
+			$stmt->bindParam(':notes', $notes);
+			
+			try {
+				$stmt->execute();
+				//prepare an array to json_encode
+				return array('status' => true, 'msg' => 'Ad event promotion notes were successfully updated!');
+			} catch (PDOException $e) {
+				//prepare an array to json_encode
+				return array('status' => false, 'msg' => $e->getMessage() + $eventCodeBefore);
+			}
+		}
 		public function addEventToPromotion($eventCode, $promoCode, $notes)
 		{
 			$stmt = $this->conn->prepare("SELECT * from AdEventPromotion WHERE EventCode='".$eventCode."' AND PromoCode='".$promoCode."'");
@@ -269,6 +289,37 @@
 				return array('status' => false, 'msg' => $e->getMessage() + $eventCodeBefore);
 			}
 			}
+		}
+		
+		function fetchReport4(){
+			$stmt = $this->conn->prepare("SELECT Item.ItemNumber, PromotionItem.PromoCode, Item.FullRetailPrice, 
+				(ROUND(PromotionItem.SalePrice, 2)) as SalePrice, (ROUND(Item.FullRetailPrice - PromotionItem.SalePrice, 2)) as Savings,
+				GROUP_CONCAT(DISTINCT AdEventPromotion.EventCode SEPARATOR ', ') AS EventCodes
+				FROM Item
+				INNER JOIN PromotionItem ON Item.ItemNumber = PromotionItem.ItemNumber
+				INNER JOIN AdEventPromotion ON PromotionItem.PromoCode = AdEventPromotion.PromoCode
+				GROUP BY Item.ItemNumber
+				ORDER BY (
+				ROUND(Item.FullRetailPrice - PromotionItem.SalePrice, 2)
+				) DESC 
+				LIMIT 0 , 50" );
+			$stmt->execute();
+			
+			$array = array();
+
+			$rows = $stmt->fetchAll();
+			foreach ($rows as $rs) {
+				$top50 = new Top50();
+				$top50->setItemNumber($rs['ItemNumber']);
+				$top50->setPromoCode($rs['PromoCode']);
+				$top50->setFullRetailPrice($rs['FullRetailPrice']);
+				$top50->setSalePrice($rs['SalePrice']);
+				$top50->setSavings($rs['Savings']);
+				$top50->setEventCode($rs['EventCodes']);
+				
+				array_push($array, $top50);
+			}
+			return $array;
 		}
 		//delete adEvent from database using its id
 		public function delete($id) {
