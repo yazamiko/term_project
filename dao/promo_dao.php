@@ -58,8 +58,14 @@
 				$promo->setPromoCode($rs['PromoCode']);
 				$promo->setName($rs['Name']);
 				$promo->setDescription($rs['Description']);
-				$promo->setAmountOff($rs['AmountOff']);
 				$promo->setPromoType($rs['PromoType']);
+				if($rs['PromoType'] == "Percent") {
+					$tmp = $rs['AmountOff']*100;
+					$tmp .= "%";
+					$promo->setAmountOff($tmp);
+				} else {
+					$promo->setAmountOff($rs['AmountOff']);
+				}
 
 				array_push($array, $promo);
 			}
@@ -99,8 +105,14 @@
 				$promo->setPromoCode($rs['PromoCode']);
 				$promo->setName($rs['Name']);
 				$promo->setDescription($rs['Description']);
-				$promo->setAmountOff($rs['AmountOff']);
 				$promo->setPromoType($rs['PromoType']);
+				if($rs['PromoType'] == "Percent") {
+					$tmp = $rs['AmountOff']*100;
+					$tmp .= "%";
+					$promo->setAmountOff($tmp);
+				} else {
+					$promo->setAmountOff($rs['AmountOff']);
+				}
 
 				array_push($array, $promo);
 			}
@@ -132,8 +144,14 @@
 				$promo->setPromoCode($rs['PromoCode']);
 				$promo->setName($rs['Name']);
 				$promo->setDescription($rs['Description']);
-				$promo->setAmountOff($rs['AmountOff']);
 				$promo->setPromoType($rs['PromoType']);
+				if($rs['PromoType'] == "Percent") {
+					$tmp = $rs['AmountOff']*100;
+					$tmp .= "%";
+					$promo->setAmountOff($tmp);
+				} else {
+					$promo->setAmountOff($rs['AmountOff']);
+				}
 
 				array_push($array, $promo);
 			}
@@ -264,24 +282,21 @@
 			$promoType = $row['PromoType'];
 			$amountOff = floatval($row['AmountOff']);
 			/*
-				Get retailPrice from Item (it's needed to calculate the new retail price)
+				Get PurchaseCost from Item (it's needed to calculate the new retail price)
 			*/
-			
 			$stmt = $this->conn->prepare("SELECT FullRetailPrice
 				FROM Item WHERE ItemNumber=$itemNumber");
 			$stmt->execute();
 
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			$retailPrice = floatval($row['FullRetailPrice']);
-			$percent = 100;
-			$amount_off = ($amountOff / $percent);
+			$purchaseCost = floatval($row['FullRetailPrice']);
+			$purchaseCost;
 
 			//Update new sale price based on promotion type
-			if($promoType == 'Dollar') $retailPrice -= $amountOff;
-			else $retailPrice -= ($retailPrice * $amount_off);
+			if($promoType == 'Dollar') $purchaseCost -= $amountOff;
+			else $purchaseCost -= ($purchaseCost * $amountOff);
 
-
-			$stmt = $this->conn->prepare("Update PromotionItem SET SalePrice = $retailPrice 
+			$stmt = $this->conn->prepare("Update PromotionItem SET SalePrice = $purchaseCost 
 				WHERE PromoCode = $promoCode and ItemNumber = $itemNumber");
 			try {
 				$stmt->execute();
