@@ -36,7 +36,7 @@ function getSubmitStatus(response) {
 
    	if(arr.status) {
    		$( "#modalButton" ).click(function() {
-  			location.href = "../view/display_ad_event_promotion.html";
+  			location.href = window.history.back();
 		});
    	}
 }

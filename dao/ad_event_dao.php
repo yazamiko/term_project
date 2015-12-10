@@ -273,7 +273,7 @@
 			$stmt->execute();
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			if (!empty($row)) {
-				return array('status' => false, 'msg' => "This promotion is already included in this Ad Event");
+				return array('status' => false, 'msg' => "This promotion: $promoCode is already included in this Ad Event: $eventCode");
 			}
 			else {
 
