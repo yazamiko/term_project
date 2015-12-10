@@ -1,13 +1,13 @@
 <html>
 <head>
-	<title>Item Display</title>
+	<title>Ad Event Display</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
 	<script type="text/javascript" src="./js/jquery-2.1.4.js">
 	</script>
 </head>
-<body onload="retrieveResult(); retrievePromotion();">
+<body onload="retrieveResult()">
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -27,44 +27,30 @@
 				<div class="panel panel-default">
 					<table class="table table-striped" align="center" >
 						<tr>
-							<td><b>Item Number</b></td><td id="item_number"></td>
+							<td><b>Ad Event Code</b></td><td id="eventCode"></td>
 						</tr>
 						<tr>
-							<td><b>Item Description</b></td><td id="item_desc"></td>
+							<td><b>Ad Event Name</b></td><td id="adName"></td>
 						</tr>
 						<tr>
-							<td><b>Category</b></td><td id="category"></td>
+							<td><b>Event Start Date</b></td><td id="startDate"></td>
 						</tr>
 						<tr>
-							<td><b>Department Name</b></td><td id="dept_name"></td>
+							<td><b>Event End Date</b></td><td id="endDate"></td>
 						</tr>
 						<tr>
-							<td><b>Purchase Cost</b></td><td id="purchase_cost"></td>
+							<td><b>Event Description</b></td><td id="adDescription"></td>
 						</tr>
 						<tr>
-							<td><b>Full Retail Price</b></td><td id="full_retail_price"></td>
-						</tr>
-						<tr>
-							<td><b>Promotion Code</b></td><td id="promo_code"></td>
-						</tr>
-						<tr>
-							<td><b>Sale Price</b></td><td id="sale_price"></td>
-						</tr>
-						<tr>
-							<td><b>Saving</b></td><td id="saving"></td>
-						</tr>
-						<tr>
-							<td><b>Event Code</b></td><td id="event_code"></td>
-						</tr>
-						<tr>
-							<td><b>Ad Event Name</b></td><td id="event_name"></td>
+							<td><b>Event Type</b></td><td id="adType"></td>
 						</tr>
 					</table>
 				</div>
 				<div class="form-group clearfix">
 					<button class="btn right btn-primary pull-left" onclick="window.history.back();">Back</button>
 				</div>
-				<!--col div-->
+				
+			<!--col div-->
 			</div>
 		<!--row div-->
 		</div>
@@ -74,7 +60,7 @@
 	<!--container div-->
 	</div>
 
-	<script type="text/javascript" src="js/view_biggest_savings.js"></script>
+	<script type="text/javascript" src="js/display_ad_event.js"></script>
 
 </body>
 </html>

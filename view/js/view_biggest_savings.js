@@ -65,7 +65,7 @@ function preparePromotionResult(response) {
       var salePrice = parseFloat(arr[0].SalePrice);
       var diff = arr[0].FullRetailPrice - arr[0].SalePrice;
       
-      document.getElementById("promo_code").innerHTML = promoCode;
+      document.getElementById("promo_code").innerHTML = "<a href='view_biggest_savings_promo.html?promoCode=" +promoCode+"'>"+ promoCode +"</a>";
       document.getElementById("sale_price").innerHTML = salePrice.toFixed(2);
       document.getElementById("saving").innerHTML = diff.toFixed(2);
 
@@ -98,7 +98,7 @@ function prepareEventResult(response) {
     var arr = JSON.parse(response);
     //    var eventCode = getQueryVariable("eventCode");
    if(arr.length > 0) {
-      document.getElementById("event_code").innerHTML = arr[0].eventCode;
+      document.getElementById("event_code").innerHTML = "<a href='view_biggest_savings_ad_event.html?eventCode=" +arr[0].eventCode+"'>"+ arr[0].eventCode +"</a>";
       document.getElementById("event_name").innerHTML = arr[0].adName;
    }
 }

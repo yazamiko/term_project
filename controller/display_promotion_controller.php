@@ -5,6 +5,8 @@ $promoDAO = new PromoDAO();
 $promoCode="";
 $name="";
 $desc="";
+	if(isset($_GET["promo_code"]))
+		$promoCode = $_GET["promo_code"];
 	if(isset($_GET["name"]))
 		$name = $_GET["name"];
 	if(isset($_GET["description"]))
