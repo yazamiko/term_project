@@ -9,28 +9,36 @@ function getQueryVariable(variable)
        return(false);
 }
 
-function checkBoxChecked()
-{
-    var checkedAtLeastOne = false;
-    $('input[type="checkbox"]').each(function() {
-        if ($(this).is(":checked")) {
-            checkedAtLeastOne = true;
+function sendData() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/edit_notes_controller.php";
+    xmlhttp.open("POST", url, true);
+
+    var params = "event_code=" + document.getElementById("event_code").value +
+    		"&promo_code=" + document.getElementById("promo_code").value +
+    		"&notes=" + document.getElementById("notes").value;
+
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            getSubmitStatus(xmlhttp.responseText);
         }
-    });
-    return checkedAtLeastOne;
+    }
+
+    xmlhttp.send(params);
 }
 
-function validate()
-{
-    var box = checkBoxChecked();
-    if(box == false)
-    {
-        document.getElementById("headErrMsg").innerHTML 
-            = "Correct the following error:";
-        document.getElementById("errMsg").innerHTML = "<li>Please select at least one item.</li>";
-    }
-    
-    return box;
+function getSubmitStatus(response) {
+    var arr = JSON.parse(response);
+    $('#msgModal').html(arr.msg);
+    $('#myModal').modal('show');
+
+   	if(arr.status) {
+   		$( "#modalButton" ).click(function() {
+  			location.href = "../view/display_ad_event_promotion.html";
+		});
+   	}
 }
 
 function retrieveResult() {
@@ -66,7 +74,7 @@ function myFunction(response) {
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +
-		"<input type='text' id='event_code' name='event_code' value='arr[i].eventCode' hidden>"+
+		"<input type='text' id='event_code' name='event_code' value='"+arr[i].eventCode+"' hidden>"+
         arr[i].eventCode +
         "</td><td>" +
 		arr[i].adName +
@@ -105,7 +113,6 @@ function retrievePromotion() {
 function preparePromotionResult(response) {
     var arr = JSON.parse(response);
     var i;
-//    var eventCode = getQueryVariable("eventCode");
     var out="<table class='table table-striped table-hover'>";
     out += "<tr>" +
             "<th>Promotion Code</th>" +
@@ -113,11 +120,10 @@ function preparePromotionResult(response) {
             "<th>Description</th>" +
             "<th>Amount Off</th>" +
             "<th>Promotion Type</th>" +
-           // "<th>Remove From Ad Event</th>" +
         "</tr>";
     for(i = 0; i < arr.length; i++) {
         out += "<tr><td>" +
-		"<input type='text' id='promo_code' name='promo_code' value='arr[i].PromoCode' hidden>"+
+		"<input type='text' id='promo_code' name='promo_code' value='"+arr[i].PromoCode+"' hidden>"+
         arr[i].PromoCode +
         "</td><td>" +
         arr[i].Name +
@@ -127,8 +133,6 @@ function preparePromotionResult(response) {
         arr[i].AmountOff +
         "</td><td>" +
         arr[i].PromoType +
-       // "</td><td>" +
-       // "<input type='checkbox' id='promotions[]' name='promotions[]' value="+ arr[i].PromoCode +">" +
         "</td></tr>";
     }
     out += "</table>";

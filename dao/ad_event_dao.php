@@ -248,7 +248,7 @@
 				return array('status' => false, 'msg' => $e->getMessage() + $eventCodeBefore);
 			}
 		}
-		public function updateEventPromotion($eventCode, $promoCode, $notes)
+		public function updateEventPromotionNotes($eventCode, $promoCode, $notes)
 		{
 			//this function only updates the notes in the table
 			$stmt = $this->conn->prepare("UPDATE AdEventPromotion 

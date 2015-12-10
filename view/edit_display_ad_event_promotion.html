@@ -21,8 +21,26 @@
 	    </div>
 	  </div>
 	</nav>
+	
+	<div id="myModal" class="modal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	        <h4 class="modal-title">Message</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p id="msgModal"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button id="modalButton" type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<div class="container">
-		<form method="post" action="../controller/edit_notes_controller.php">
+		<!--<form method="post" action="../controller/edit_notes_controller.php">-->
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<h3>Ad Event:</h3>
@@ -43,15 +61,16 @@
 				</div>
 			</div>
 			<div class="form-group clearfix">
-				<button type="submit" class="btn right btn-primary pull-right">Update Notes </button>
+				<button class="btn right btn-primary pull-right" onclick="sendData()">Update Notes </button>
 			</div>
-		</form>
+		<!--</form>-->
 	<!--container div-->
 	</div>
 	<footer>
 		<img src="images/wi.png" alt="Web App Dev logo" height="45" width="45" align="right">
 	</footer>
 	<script type="text/javascript" src="js/edit_display_ad_event_promotion.js"></script>
-
+		<script type="text/javascript" src="./js/bootstrap.js">
+	</script>
 </body>
 </html>
