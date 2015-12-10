@@ -13,11 +13,18 @@ function retrievePromotion() {
     var xmlhttp = new XMLHttpRequest();
     var url = "../controller/display_promotion_controller.php";
 
-    var name = getQueryVariable("name");
-    var desc = getQueryVariable("description");
+	var promoCode = "";
+	var name = "";
+	var desc = "";
+	if(getQueryVariable("promoCode") != false )
+		promoCode = getQueryVariable("promoCode");
+	if(getQueryVariable("name") != false )
+		name = getQueryVariable("name");
+	if(getQueryVariable("description") != false )
+    desc = getQueryVariable("description");
  //   var property = "PromoCode";
 	
-	url += "?name=" + name;// + "&description=" + desc;
+	url += "?promo_code="+promoCode+"&name=" + name;// + "&description=" + desc;
 	
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
