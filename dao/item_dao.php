@@ -94,7 +94,7 @@
 			else
 				$sqlStmt = "1";
 			
-			$stmt = $this->conn->prepare("SELECT * FROM Item WHERE ( ".$sqlStmt." )");
+			$stmt = $this->conn->prepare("SELECT Item.*, PromotionItem.SalePrice FROM Item INNER JOIN PromotionItem USING (ItemNumber) WHERE ( ".$sqlStmt." )");
 			
 			$stmt->execute();
 			
@@ -109,6 +109,7 @@
 				$item->setDepartmentName($rs['DepartmentName']);
 				$item->setPurchaseCost($rs['PurchaseCost']);
 				$item->setFullRetailPrice($rs['FullRetailPrice']);
+				$item->setSalePrice($rs['SalePrice']);
 
 				array_push($array, $item);
 			}
