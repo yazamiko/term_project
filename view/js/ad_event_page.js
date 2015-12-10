@@ -98,22 +98,53 @@ function preparePromotionResult(response) {
             "<th>Amount Off</th>" +
             "<th>Promotion Type</th>" +
             "<th>Remove</th>" +
+            "<th>Notes</th>" +
         "</tr>";
+        var count = arr.length;
     for(i = 0; i < arr.length; i++) {
-        out += "<tr><td>" +
-        arr[i].PromoCode +
-        "</td><td>" +
-        arr[i].Name +
-        "</td><td>" +
-        arr[i].Description +
-        "</td><td>" +
-        arr[i].AmountOff +
-        "</td><td>" +
-        arr[i].PromoType +
-        "</td><td>" +
-        "<input type='checkbox' id='promotions[]' name='promotions[]' value="+ arr[i].PromoCode +">" +
-        "</td></tr>";
+        retrieveNotes(arr[i],  getQueryVariable("eventCode"), function(arr, note){
+            out += "<tr><td>" +
+            arr.PromoCode +
+            "</td><td>" +
+            arr.Name +
+            "</td><td>" +
+            arr.Description +
+            "</td><td>" +
+            arr.AmountOff +
+            "</td><td>" +
+            arr.PromoType +
+            "</td><td>" +
+            "<input type='checkbox' id='promotions[]' name='promotions[]' value="+ arr.PromoCode +">" +
+    		"</td><td>" +
+    		"<a href='edit_display_ad_event_promotion.html?event_code="+  getQueryVariable("eventCode") +
+    		"&promo_code="+arr.PromoCode+"'>"+ note +"</a>" +
+    		//retrieveNotes(arr[i].PromoCode,  getQueryVariable("eventCode"))+
+            "</td></tr>";
+            count = count - 1;
+            if ( count === 0) {
+                out += "</table>";
+                document.getElementById("resultTable").innerHTML = out;
+            }
+        });
     }
-    out += "</table>";
-    document.getElementById("resultTable").innerHTML = out;
+}
+
+function retrieveNotes(item, eventCode, callback)
+{
+	var xmlhttp = new XMLHttpRequest();
+    var url = "../controller/display_ad_event_promotion_controller.php";
+	
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            callback(item, prepareNotesResult(xmlhttp.responseText));
+        }
+    }
+
+    xmlhttp.open("GET", url +"?event_code=" + eventCode + "&promo_code=" + item.PromoCode, true);
+    xmlhttp.send();
+}
+
+function prepareNotesResult(response) {
+    var arr = JSON.parse(response);
+	return arr[0].Notes;
 }
