@@ -193,10 +193,12 @@
 
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			$retailPrice = floatval($row['FullRetailPrice']);
+			$percent = 100;
+			$amount_off = ($amountOff / $percent);
 
 			//Update new sale price based on promotion type
 			if($promoType == 'Dollar') $retailPrice -= $amountOff;
-			else $retailPrice -= ($retailPrice * $amountOff);
+			else $retailPrice -= ($retailPrice * $amount_off);
 
 			$stmt = $this->conn->prepare("INSERT INTO PromotionItem(PromoCode, 
 				ItemNumber, SalePrice) 
